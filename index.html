@@ -7,7 +7,7 @@
     <style>
         @page {
             size: A4;
-            margin: 0;
+            margin: 15mm;
         }
         
         * {
@@ -18,18 +18,20 @@
         
         body {
             font-family: 'Times New Roman', serif;
-            background: #f5f5f5;
-            padding: 20px;
+            background: white;
+            padding: 0;
         }
         
         .page {
             width: 210mm;
-            min-height: 297mm;
+            height: 297mm;
             background: white;
-            margin: 0 auto 20px;
-            padding: 25mm;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 0 auto;
+            padding: 20mm;
+            box-shadow: none;
             page-break-after: always;
+            page-break-inside: avoid;
+            overflow: hidden;
         }
         
         .cover-page {
@@ -39,8 +41,10 @@
             align-items: center;
             text-align: center;
             border: 3px double #1e3a8a;
-            padding: 40px;
-            min-height: 247mm;
+            padding: 30px;
+            height: 257mm;
+            page-break-after: always;
+            page-break-inside: avoid;
         }
         
         .logo-placeholder {
@@ -105,8 +109,10 @@
         
         .certificate-page {
             border: 3px double #1e3a8a;
-            padding: 40px;
-            min-height: 247mm;
+            padding: 30px;
+            height: 257mm;
+            page-break-after: always;
+            page-break-inside: avoid;
         }
         
         .cert-header {
@@ -151,18 +157,21 @@
             margin-bottom: 20px;
             border-bottom: 2px solid #1e3a8a;
             padding-bottom: 10px;
+            page-break-after: avoid;
         }
         
         h2 {
             color: #2563eb;
             font-size: 20px;
             margin: 25px 0 15px;
+            page-break-after: avoid;
         }
         
         h3 {
             color: #333;
             font-size: 18px;
             margin: 20px 0 10px;
+            page-break-after: avoid;
         }
         
         p, li {
@@ -202,6 +211,7 @@
             width: 100%;
             border-collapse: collapse;
             margin: 20px 0;
+            page-break-inside: avoid;
         }
         
         table, th, td {
@@ -227,6 +237,7 @@
             font-family: 'Courier New', monospace;
             font-size: 12px;
             overflow-x: auto;
+            page-break-inside: avoid;
         }
         
         .footer {
@@ -242,15 +253,29 @@
             body {
                 background: white;
                 padding: 0;
+                margin: 0;
             }
             
             .page {
                 margin: 0;
                 box-shadow: none;
+                page-break-after: always;
+                page-break-inside: avoid;
+                width: 100%;
+                height: 100%;
+                padding: 15mm;
             }
             
             .no-print {
-                display: none;
+                display: none !important;
+            }
+            
+            h1, h2, h3, h4 {
+                page-break-after: avoid;
+            }
+            
+            table, .code-block, .image-placeholder {
+                page-break-inside: avoid;
             }
         }
         
