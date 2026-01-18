@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internship Report - Asset Management System</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Times New Roman', serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            margin: 0 auto 20px;
+            padding: 25mm;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            page-break-after: always;
+        }
+        
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            text-align: center;
+            border: 3px double #1e3a8a;
+            padding: 40px;
+            min-height: 247mm;
+        }
+        
+        .logo-placeholder {
+            width: 120px;
+            height: 120px;
+            border: 2px dashed #666;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            color: #666;
+            margin: 20px auto;
+        }
+        
+        .cover-title {
+            margin: 30px 0;
+        }
+        
+        .cover-title h1 {
+            font-size: 28px;
+            color: #1e3a8a;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        
+        .cover-title h2 {
+            font-size: 22px;
+            color: #333;
+            margin: 15px 0;
+            font-weight: normal;
+        }
+        
+        .cover-title h3 {
+            font-size: 18px;
+            color: #555;
+            font-weight: normal;
+            margin: 10px 0;
+        }
+        
+        .submitted-by {
+            margin: 30px 0;
+            font-size: 16px;
+            line-height: 2;
+        }
+        
+        .submitted-by strong {
+            font-size: 18px;
+        }
+        
+        .institution {
+            margin-top: 30px;
+            font-size: 16px;
+            line-height: 1.8;
+        }
+        
+        .institution strong {
+            font-size: 18px;
+            color: #1e3a8a;
+        }
+        
+        .certificate-page {
+            border: 3px double #1e3a8a;
+            padding: 40px;
+            min-height: 247mm;
+        }
+        
+        .cert-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .cert-header h1 {
+            font-size: 32px;
+            color: #1e3a8a;
+            text-decoration: underline;
+            margin-bottom: 20px;
+        }
+        
+        .cert-content {
+            text-align: justify;
+            line-height: 2;
+            font-size: 16px;
+            margin: 30px 0;
+        }
+        
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 80px;
+        }
+        
+        .signature-block {
+            text-align: center;
+        }
+        
+        .signature-line {
+            width: 200px;
+            border-top: 1px solid #000;
+            margin-top: 60px;
+            padding-top: 10px;
+        }
+        
+        h1 {
+            color: #1e3a8a;
+            font-size: 24px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #1e3a8a;
+            padding-bottom: 10px;
+        }
+        
+        h2 {
+            color: #2563eb;
+            font-size: 20px;
+            margin: 25px 0 15px;
+        }
+        
+        h3 {
+            color: #333;
+            font-size: 18px;
+            margin: 20px 0 10px;
+        }
+        
+        p, li {
+            text-align: justify;
+            line-height: 1.8;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .toc {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .toc li {
+            padding: 10px 0;
+            border-bottom: 1px dotted #ccc;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .toc li:last-child {
+            border-bottom: none;
+        }
+        
+        .image-placeholder {
+            border: 2px dashed #999;
+            padding: 60px 20px;
+            text-align: center;
+            margin: 20px 0;
+            background: #f9f9f9;
+            color: #666;
+            font-style: italic;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        table, th, td {
+            border: 1px solid #333;
+        }
+        
+        th {
+            background: #1e3a8a;
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        td {
+            padding: 10px;
+        }
+        
+        .code-block {
+            background: #f5f5f5;
+            border-left: 4px solid #1e3a8a;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            overflow-x: auto;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ccc;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .page {
+                margin: 0;
+                box-shadow: none;
+            }
+            
+            .no-print {
+                display: none;
+            }
+        }
+        
+        .btn-download {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 30px;
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        
+        .btn-download:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <button class="btn-download no-print" onclick="downloadPDF()">Download PDF</button>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        function downloadPDF() {
+            const element = document.body;
+            const opt = {
+                margin: 0,
+                filename: 'Asset_Management_System_Report_Amarjeet_Kumar.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            // Hide the download button before generating PDF
+            const btn = document.querySelector('.btn-download');
+            btn.style.display = 'none';
+            
+            html2pdf().set(opt).from(element).save().then(() => {
+                btn.style.display = 'block';
+            });
+        }
+    </script>
+
+    <!-- Cover Page -->
+    <div class="page cover-page">
+        <div>
+            <div class="logo-placeholder">BSPHCL LOGO</div>
+            <div class="cover-title">
+                <h1>Internship Report</h1>
+                <h2>On</h2>
+                <h1>Asset Management System</h1>
+                <h3>A Web-Based Application for Organizational Asset Tracking</h3>
+            </div>
+        </div>
+        
+        <div class="submitted-by">
+            <strong>Submitted By:</strong><br>
+            Amarjeet Kumar<br>
+            Registration No: 22155135005<br>
+            B.Tech in Computer Science & Engineering<br>
+            Government Engineering College, Vaishali
+        </div>
+        
+        <div class="institution">
+            <strong>Bihar State Power (Holding) Company Limited</strong><br>
+            Vidyut Bhawan, Jawahar Lal Nehru Marg, Patna<br><br>
+            <strong>Training Period:</strong> 08 December 2025 to 18 January 2026<br>
+            <strong>Supervisor:</strong> Shri Kuldeep Sharma, DBA, BSPTCL
+        </div>
+    </div>
+
+    <!-- Certificate Page -->
+    <div class="page certificate-page">
+        <div class="logo-placeholder">BSPHCL LOGO</div>
+        
+        <div class="cert-header">
+            <h1>CERTIFICATE</h1>
+        </div>
+        
+        <div class="cert-content">
+            <p>This is to certify that <strong>Mr. Amarjeet Kumar</strong>, Registration Number <strong>22155135005</strong>, a student of B.Tech Computer Science & Engineering at Government Engineering College, Vaishali, has successfully completed the in-plant training at Bihar State Power (Holding) Company Limited from <strong>8th December 2025 to 18th January 2026</strong>.</p>
+            
+            <p>During the training period, he worked on developing an <strong>Asset Management System</strong> under the guidance of <strong>Shri Kuldeep Sharma, DBA, BSPTCL</strong>. The trainee has shown dedication, sincerity, and technical competence throughout the training period.</p>
+            
+            <p>The project involved designing and implementing a comprehensive web-based application for tracking and managing organizational assets with features including CRUD operations, real-time search, filtering capabilities, and data persistence.</p>
+            
+            <p>We wish him all the best for his future endeavors.</p>
+        </div>
+        
+        <div class="signatures">
+            <div class="signature-block">
+                <div class="signature-line">
+                    <strong>Training Supervisor</strong><br>
+                    Shri Kuldeep Sharma<br>
+                    DBA, BSPTCL
+                </div>
+            </div>
+            
+            <div class="signature-block">
+                <div class="signature-line">
+                    <strong>Deputy Secretary</strong><br>
+                    Rakesh Kumar<br>
+                    HR & Administration
+                </div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 60px;">
+            <strong>Bihar State Power (Holding) Company Limited</strong><br>
+            Patna
+        </div>
+    </div>
+
+    <!-- Acknowledgement Page -->
+    <div class="page">
+        <h1>ACKNOWLEDGEMENT</h1>
+        
+        <p>I would like to express my sincere gratitude to <strong>Bihar State Power (Holding) Company Limited</strong> for providing me with the opportunity to undertake this in-plant training and gain valuable practical knowledge in the field of software development and asset management systems.</p>
+        
+        <p>I am deeply grateful to <strong>Shri Kuldeep Sharma, DBA, BSPTCL</strong>, my training supervisor, for his continuous guidance, support, and valuable insights throughout the training period. His expertise and mentorship were instrumental in the successful completion of this project.</p>
+        
+        <p>I would like to thank <strong>Mr. Rakesh Kumar, Deputy Secretary, HR & Administration</strong>, for facilitating this training opportunity and providing administrative support.</p>
+        
+        <p>I am thankful to the entire IT department and staff of BSPHCL for their cooperation and for creating a conducive learning environment during my training period.</p>
+        
+        <p>I extend my gratitude to <strong>Government Engineering College, Vaishali</strong>, and especially to the <strong>Internship Coordinator</strong> for coordinating this training program and encouraging practical learning experiences.</p>
+        
+        <p>I would also like to thank my fellow trainees for their collaboration and support during the training period.</p>
+        
+        <p>Finally, I am grateful to my family and friends for their constant encouragement and support throughout this journey.</p>
+        
+        <br><br>
+        <div style="text-align: right;">
+            <strong>Amarjeet Kumar</strong><br>
+            Reg. No: 22155135005<br>
+            Date: January 18, 2026
+        </div>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="page">
+        <h1>TABLE OF CONTENTS</h1>
+        
+        <ul class="toc">
+            <li><span>Certificate</span><span>i</span></li>
+            <li><span>Acknowledgement</span><span>ii</span></li>
+            <li><span>Table of Contents</span><span>iii</span></li>
+            <li><span>List of Figures</span><span>iv</span></li>
+            <li><span>Abstract</span><span>1</span></li>
+            <li><span>1. Introduction</span><span>2</span></li>
+            <li><span>&nbsp;&nbsp;&nbsp;1.1 About BSPHCL</span><span>2</span></li>
+            <li><span>&nbsp;&nbsp;&nbsp;1.2 Training Objectives</span><span>3</span></li>
+            <li><span>2. Project Overview</span><span>4</span></li>
+            <li><span>&nbsp;&nbsp;&nbsp;2.1 Problem Statement</span><span>4</span></li>
+            <li><span>&nbsp;&nbsp;&nbsp;2.2 Objectives</span><span>5</span></li>
+            <li><span>&nbsp;&nbsp;&nbsp;2.3 Scope</span><span>5</span></li>
+            <li><span>3. System Analysis</span><span>6</span></li>
+            <li><span>&nbsp;&nbsp;&nbsp;3.1 Requirements Analysis</span><span>6</span></li>
+            <li><span>&nbsp;&nbsp;&nbsp;3.2 Feasibility Study</span><span>7</span></li>
+            <li><span>4. System Design</span><span>8</span></li>
+            <li><span>&nbsp;&nbsp;&nbsp;4.1 Architecture</span><span>8</span></li>
+            <li><span>&nbsp;&nbsp;&nbsp;4.2 Database Design</span><span>9</span></li>
+            <li><span>&nbsp;&nbsp;&nbsp;4.3 User Interface Design</span><span>10</span></li>
+            <li><span>5. Implementation</span><span>11</span></li>
+            <li><span>&nbsp;&nbsp;&nbsp;5.1 Technologies Used</span><span>11</span></li>
+            <li><span>&nbsp;&nbsp;&nbsp;5.2 Core Features</span><span>12</span></li>
+            <li><span>&nbsp;&nbsp;&nbsp;5.3 Code Structure</span><span>13</span></li>
+            <li><span>6. Testing & Deployment</span><span>14</span></li>
+            <li><span>&nbsp;&nbsp;&nbsp;6.1 Testing Methodology</span><span>14</span></li>
+            <li><span>&nbsp;&nbsp;&nbsp;6.2 Deployment Process</span><span>15</span></li>
+            <li><span>7. Results & Screenshots</span><span>16</span></li>
+            <li><span>8. Conclusion & Future Scope</span><span>17</span></li>
+            <li><span>9. References</span><span>18</span></li>
+            <li><span>Appendix: Source Code</span><span>19</span></li>
+        </ul>
+    </div>
+
+    <!-- List of Figures -->
+    <div class="page">
+        <h1>LIST OF FIGURES</h1>
+        
+        <ul class="toc">
+            <li><span>Figure 1: System Architecture Diagram</span><span>8</span></li>
+            <li><span>Figure 2: Database Schema</span><span>9</span></li>
+            <li><span>Figure 3: Main Dashboard Interface</span><span>10</span></li>
+            <li><span>Figure 4: Asset Entry Form</span><span>16</span></li>
+            <li><span>Figure 5: Asset List View with Filters</span><span>16</span></li>
+            <li><span>Figure 6: Statistics Dashboard</span><span>17</span></li>
+            <li><span>Figure 7: Responsive Mobile View</span><span>17</span></li>
+            <li><span>Figure 8: Deployment Architecture</span><span>15</span></li>
+        </ul>
+    </div>
+
+    <!-- Abstract -->
+    <div class="page">
+        <h1>ABSTRACT</h1>
+        
+        <p>This report presents the development and implementation of a comprehensive Asset Management System designed during the in-plant training at Bihar State Power (Holding) Company Limited. The system addresses the critical need for efficient tracking, management, and monitoring of organizational assets in modern enterprises.</p>
+        
+        <p>The Asset Management System is a web-based application built using HTML5, CSS3, and JavaScript, featuring a modern, responsive user interface with gradient designs and smooth animations. The system provides complete CRUD (Create, Read, Update, Delete) operations for asset management, along with advanced features such as real-time search, multi-criteria filtering, and comprehensive statistical dashboards.</p>
+        
+        <p>Key features include asset categorization by type and status, value tracking, location management, assignment tracking, and data persistence using browser LocalStorage API. The system employs a client-side architecture ensuring fast performance and offline capability while maintaining data integrity.</p>
+        
+        <p>The project successfully demonstrates the application of modern web development technologies in solving real-world business problems. The system has been deployed on cloud platforms (Vercel) ensuring high availability and accessibility. Comprehensive testing validates the system's functionality, usability, and reliability.</p>
+        
+        <p>This training experience provided valuable insights into full-stack web development, user interface design, data management, and cloud deployment practices, preparing for future challenges in software development and IT infrastructure management.</p>
+        
+        <p><strong>Keywords:</strong> Asset Management, Web Application, CRUD Operations, LocalStorage, Responsive Design, Cloud Deployment</p>
+    </div>
+
+    <!-- Chapter 1: Introduction -->
+    <div class="page">
+        <h1>1. INTRODUCTION</h1>
+        
+        <h2>1.1 About Bihar State Power (Holding) Company Limited</h2>
+        
+        <p>Bihar State Power (Holding) Company Limited (BSPHCL) is a state government undertaking established to manage and coordinate power sector operations in Bihar. The company plays a crucial role in electricity generation, transmission, and distribution across the state.</p>
+        
+        <div class="image-placeholder">
+            [Insert BSPHCL Building/Logo Image]
+        </div>
+        
+        <p>BSPHCL operates through various subsidiary companies and manages extensive infrastructure including power plants, transmission networks, distribution systems, and administrative facilities. The organization maintains thousands of assets ranging from heavy electrical equipment to IT hardware and office furniture.</p>
+        
+        <h3>Organizational Structure:</h3>
+        <ul>
+            <li>Corporate Office: Located at Vidyut Bhawan, Jawahar Lal Nehru Marg, Patna</li>
+            <li>Multiple departmental divisions including HR & Administration, IT, Finance, and Operations</li>
+            <li>Extensive field operations across Bihar</li>
+            <li>Large workforce managing critical power infrastructure</li>
+        </ul>
+        
+        <h2>1.2 Training Objectives</h2>
+        
+        <p>The primary objectives of this six-week in-plant training program were:</p>
+        
+        <ul>
+            <li><strong>Practical Skill Development:</strong> Gain hands-on experience in web application development using modern technologies and frameworks.</li>
+            
+            <li><strong>Understanding Business Requirements:</strong> Learn to analyze organizational needs and translate them into technical solutions.</li>
+            
+            <li><strong>System Design & Architecture:</strong> Understand the principles of designing scalable, maintainable software systems.</li>
+            
+            <li><strong>Full Development Lifecycle:</strong> Experience complete software development from requirements gathering to deployment.</li>
+            
+            <li><strong>Database Management:</strong> Learn data modeling, storage strategies, and data integrity concepts.</li>
+            
+            <li><strong>User Interface Design:</strong> Develop skills in creating intuitive, responsive, and visually appealing interfaces.</li>
+            
+            <li><strong>Testing & Quality Assurance:</strong> Implement comprehensive testing strategies to ensure system reliability.</li>
+            
+            <li><strong>Deployment & DevOps:</strong> Understand cloud deployment processes and continuous integration practices.</li>
+            
+            <li><strong>Professional Work Environment:</strong> Experience corporate culture, teamwork, and professional communication.</li>
+        </ul>
+    </div>
+
+    <!-- Chapter 2: Project Overview -->
+    <div class="page">
+        <h1>2. PROJECT OVERVIEW</h1>
+        
+        <h2>2.1 Problem Statement</h2>
+        
+        <p>Large organizations like BSPHCL manage thousands of assets across multiple locations, departments, and categories. Traditional asset management methods involving spreadsheets and manual record-keeping present several challenges:</p>
+        
+        <ul>
+            <li><strong>Data Fragmentation:</strong> Asset information scattered across multiple files and departments</li>
+            <li><strong>Lack of Real-time Updates:</strong> Difficulty in tracking current asset status and location</li>
+            <li><strong>Inefficient Search:</strong> Time-consuming process to locate specific asset information</li>
+            <li><strong>No Centralized Dashboard:</strong> Absence of consolidated view of organizational assets</li>
+            <li><strong>Manual Tracking Errors:</strong> Higher probability of data entry mistakes and inconsistencies</li>
+            <li><strong>Audit Challenges:</strong> Difficulty in generating reports for audits and compliance</li>
+            <li><strong>Poor Visibility:</strong> Limited insight into asset utilization and total organizational value</li>
+        </ul>
+        
+        <div class="image-placeholder">
+            [Insert Problem Illustration - Traditional vs Digital Asset Management]
+        </div>
+        
+        <h2>2.2 Objectives</h2>
+        
+        <p>The Asset Management System was developed with the following specific objectives:</p>
+        
+        <ul>
+            <li>Create a centralized platform for managing all organizational assets</li>
+            <li>Implement complete CRUD functionality for asset lifecycle management</li>
+            <li>Provide real-time search and filtering capabilities</li>
+            <li>Design an intuitive, user-friendly interface requiring minimal training</li>
+            <li>Generate automatic statistics and insights on asset portfolio</li>
+            <li>Ensure data persistence and reliability</li>
+            <li>Develop a responsive system accessible across devices</li>
+            <li>Enable easy deployment and maintenance</li>
+        </ul>
+        
+        <h2>2.3 Scope</h2>
+        
+        <h3>In Scope:</h3>
+        <ul>
+            <li>Asset registration with comprehensive details</li>
+            <li>Category and type-based classification</li>
+            <li>Status tracking (Active, Maintenance, Retired)</li>
+            <li>Value and purchase date recording</li>
+            <li>Location and assignment tracking</li>
+            <li>Search and filter functionality</li>
+            <li>Statistical dashboard with key metrics</li>
+            <li>Data persistence using LocalStorage</li>
+            <li>Responsive design for all screen sizes</li>
+        </ul>
+        
+        <h3>Out of Scope (Future Enhancements):</h3>
+        <ul>
+            <li>Multi-user authentication and authorization</li>
+            <li>Backend database integration</li>
+            <li>Advanced reporting and analytics</li>
+            <li>Asset depreciation calculations</li>
+            <li>Barcode/QR code integration</li>
+            <li>Email notifications and alerts</li>
+            <li>Document attachment capabilities</li>
+        </ul>
+    </div>
+
+    <!-- Chapter 3: System Analysis -->
+    <div class="page">
+        <h1>3. SYSTEM ANALYSIS</h1>
+        
+        <h2>3.1 Requirements Analysis</h2>
+        
+        <h3>Functional Requirements:</h3>
+        
+        <table>
+            <tr>
+                <th>Requirement ID</th>
+                <th>Description</th>
+                <th>Priority</th>
+            </tr>
+            <tr>
+                <td>FR-01</td>
+                <td>Add new asset with all relevant details</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>FR-02</td>
+                <td>View complete list of all assets</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>FR-03</td>
+                <td>Edit existing asset information</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>FR-04</td>
+                <td>Delete assets from the system</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>FR-05</td>
+                <td>Search assets by name or type</td>
+                <td>High</td>
+            </tr>
+            <tr>
+                <td>FR-06</td>
+                <td>Filter assets by status and type</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>FR-07</td>
+                <td>Display total assets count</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>FR-08</td>
+                <td>Calculate and display total value</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>FR-09</td>
+                <td>Track active assets separately</td>
+                <td>Medium</td>
+            </tr>
+            <tr>
+                <td>FR-10</td>
+                <td>Persist data across sessions</td>
+                <td>High</td>
+            </tr>
+        </table>
+        
+        <h3>Non-Functional Requirements:</h3>
+        
+        <table>
+            <tr>
+                <th>Requirement ID</th>
+                <th>Description</th>
+                <th>Specification</th>
+            </tr>
+            <tr>
+                <td>NFR-01</td>
+                <td>Performance</td>
+                <td>Page load time < 2 seconds</td>
+            </tr>
+            <tr>
+                <td>NFR-02</td>
+                <td>Usability</td>
+                <td>Intuitive UI, minimal training required</td>
+            </tr>
+            <tr>
+                <td>NFR-03</td>
+                <td>Compatibility</td>
+                <td>Support all modern browsers</td>
+            </tr>
+            <tr>
+                <td>NFR-04</td>
+                <td>Responsiveness</td>
+                <td>Adaptive design for mobile, tablet, desktop</td>
+            </tr>
+            <tr>
+                <td>NFR-05</td>
+                <td>Reliability</td>
+                <td>99% uptime, data integrity maintained</td>
+            </tr>
+            <tr>
+                <td>NFR-06</td>
+                <td>Scalability</td>
+                <td>Handle 1000+ assets efficiently</td>
+            </tr>
+        </table>
+        
+        <h2>3.2 Feasibility Study</h2>
+        
+        <h3>Technical Feasibility:</h3>
+        <p>The project is technically feasible using standard web technologies (HTML5, CSS3, JavaScript) that are well-documented and widely supported. LocalStorage API provides sufficient data persistence for the current scope. Cloud platforms like Vercel offer free hosting with excellent reliability.</p>
+        
+        <h3>Economic Feasibility:</h3>
+        <p>The project requires minimal investment as it uses free, open-source technologies and free tier cloud hosting. No licensing costs or proprietary software dependencies. Cost-effective solution compared to commercial asset management systems.</p>
+        
+        <h3>Operational Feasibility:</h3>
+        <p>The system is designed to be user-friendly and requires minimal training. It can be operated by personnel with basic computer skills. The web-based nature ensures easy accessibility without software installation requirements.</p>
+    </div>
+
+    <!-- Chapter 4: System Design -->
+    <div class="page">
+        <h1>4. SYSTEM DESIGN</h1>
+        
+        <h2>4.1 Architecture</h2>
+        
+        <p>The Asset Management System follows a client-side architecture with the following components:</p>
+        
+        <div class="image-placeholder">
+            [Insert System Architecture Diagram showing:<br>
+            - User Interface Layer (HTML/CSS)<br>
+            - Business Logic Layer (JavaScript)<br>
+            - Data Storage Layer (LocalStorage)<br>
+            - Deployment Layer (Vercel/GitHub Pages)]
+        </div>
+        
+        <h3>Architectural Components:</h3>
+        
+        <ul>
+            <li><strong>Presentation Layer:</strong> HTML5 for structure, CSS3 for styling with gradient designs and animations</li>
+            <li><strong>Application Layer:</strong> JavaScript for business logic, event handling, and data manipulation</li>
+            <li><strong>Data Layer:</strong> Browser LocalStorage for persistent data storage</li>
+            <li><strong>Deployment Layer:</strong> Cloud hosting on Vercel with CDN support</li>
+        </ul>
+        
+        <h3>Design Patterns Used:</h3>
+        
+        <ul>
+            <li><strong>MVC Pattern:</strong> Separation of data (model), presentation (view), and logic (controller)</li>
+            <li><strong>Event-Driven Architecture:</strong> User interactions trigger events that update the system state</li>
+            <li><strong>Responsive Design Pattern:</strong> CSS Grid and Flexbox for adaptive layouts</li>
+        </ul>
+        
+        <h2>4.2 Database Design</h2>
+        
+        <p>The system uses a simple JSON-based data structure stored in LocalStorage:</p>
+        
+        <div class="code-block">
+Asset Object Structure:
+{
+    id: Number (timestamp),
+    name: String (required),
+    type: String (required),
+    category: String,
+    value: Number,
+    purchaseDate: Date,
+    status: String (Active/Maintenance/Retired),
+    location: String,
+    assignedTo: String,
+    description: String
+}
+        </div>
+        
+        <div class="image-placeholder">
+            [Insert Entity-Relationship Diagram or Data Structure Diagram]
+        </div>
+        
+        <h3>Data Attributes:</h3>
+        
+        <table>
+            <tr>
+                <th>Attribute</th>
+                <th>Type</th>
+                <th>Required</th>
+                <th>Description</th>
+            </tr>
+            <tr>
+                <td>id</td>
+                <td>Number</td>
+                <td>Yes</td>
+                <td>Unique identifier (timestamp)</td>
+            </tr>
+            <tr>
