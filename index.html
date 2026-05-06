@@ -7,83 +7,102 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman:ital,wght@0,400;0,700;1,400&display=swap');
   *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Times New Roman',Times,serif;background:#e8e8e8;color:#111;font-size:11pt;line-height:1.7}
+  body{font-family:'Times New Roman',Times,serif;background:#e8e8e8;color:#111;font-size:11pt;line-height:1.6}
 
   .page{
     width:210mm;
     margin:0 auto 24px;
     background:#fff;
-    padding:12mm 18mm 18mm 22mm;
+    padding:10mm 16mm 22mm 20mm;
     box-shadow:0 4px 24px rgba(0,0,0,.2);
     position:relative;
     min-height:297mm;
+    overflow:hidden;
   }
-  .page::before{content:'';position:absolute;top:6mm;left:8mm;right:6mm;bottom:6mm;border:2.5px double #1a3a6b;pointer-events:none}
-  .page::after{content:'';position:absolute;top:8.5mm;left:10.5mm;right:8.5mm;bottom:8.5mm;border:.8px solid #1a3a6b;pointer-events:none}
 
-  .header{text-align:center;padding-bottom:8px;border-bottom:2.5px solid #1a3a6b;margin-bottom:10px}
-  .logo-row{display:flex;align-items:center;justify-content:center;gap:14px;margin-bottom:6px}
-  .logo-row img{width:70px;height:70px;object-fit:contain}
-  .inst-text h1{font-size:15pt;font-weight:700;color:#1a3a6b;line-height:1.2}
-  .inst-text h2{font-size:10pt;font-weight:400;color:#444;margin-top:2px}
-  .inst-text h3{font-size:9pt;color:#555;margin-top:2px}
-  .affil{font-size:8.5pt;color:#555;margin-top:4px}
+  /* Single clean border only */
+  .page::before{
+    content:'';
+    position:absolute;
+    top:5mm;left:6mm;right:5mm;bottom:5mm;
+    border:2px solid #1a3a6b;
+    pointer-events:none;
+    z-index:0;
+  }
 
-  .mini-header{border-bottom:1.5px solid #1a3a6b;margin-bottom:10px;padding-bottom:5px;display:flex;align-items:center;gap:12px}
-  .mini-header img{width:44px;height:44px;object-fit:contain}
-  .mini-header-text h2{font-size:11pt;font-weight:700;color:#1a3a6b}
-  .mini-header-text p{font-size:8pt;color:#555}
+  .header{text-align:center;padding-bottom:6px;border-bottom:2px solid #1a3a6b;margin-bottom:8px}
+  .logo-row{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:5px}
+  .logo-row img{width:62px;height:62px;object-fit:contain}
+  .inst-text h1{font-size:14pt;font-weight:700;color:#1a3a6b;line-height:1.2}
+  .inst-text h2{font-size:9.5pt;font-weight:400;color:#444;margin-top:2px}
+  .inst-text h3{font-size:8.5pt;color:#555;margin-top:2px}
+  .affil{font-size:8pt;color:#555;margin-top:3px}
 
-  .title-block{text-align:center;margin:12px 0 10px}
-  .title-block .label{font-size:9.5pt;letter-spacing:1.5px;color:#555;text-transform:uppercase;margin-bottom:4px}
-  .title-block .proj-title{font-size:13pt;font-weight:700;color:#1a3a6b;border-top:1.5px solid #1a3a6b;border-bottom:1.5px solid #1a3a6b;padding:6px 0}
-  .title-block .sub{font-size:10pt;font-style:italic;color:#333;margin-top:5px}
+  .mini-header{border-bottom:1.5px solid #1a3a6b;margin-bottom:8px;padding-bottom:4px;display:flex;align-items:center;gap:10px}
+  .mini-header img{width:40px;height:40px;object-fit:contain}
+  .mini-header-text h2{font-size:10.5pt;font-weight:700;color:#1a3a6b}
+  .mini-header-text p{font-size:7.5pt;color:#555}
 
-  .section{margin-bottom:12px}
-  .section h2{font-size:12pt;font-weight:700;color:#fff;background:#1a3a6b;padding:4px 10px;margin-bottom:6px}
-  .section h3{font-size:10.5pt;font-weight:700;color:#1a3a6b;border-left:3px solid #1a3a6b;padding-left:7px;margin:8px 0 4px}
-  p{font-size:10.5pt;line-height:1.75;text-align:justify;margin-bottom:5px}
-  ul,ol{margin-left:20px;margin-top:3px;margin-bottom:5px}
-  li{font-size:10.5pt;line-height:1.7;text-align:justify}
+  .title-block{text-align:center;margin:8px 0}
+  .title-block .label{font-size:9pt;letter-spacing:1.2px;color:#555;text-transform:uppercase;margin-bottom:3px}
+  .title-block .proj-title{font-size:12.5pt;font-weight:700;color:#1a3a6b;border-top:1.5px solid #1a3a6b;border-bottom:1.5px solid #1a3a6b;padding:5px 0}
+  .title-block .sub{font-size:9.5pt;font-style:italic;color:#333;margin-top:4px}
 
-  table{width:100%;border-collapse:collapse;margin:6px 0;font-size:9.5pt}
+  .section{margin-bottom:8px}
+  .section h2{font-size:11.5pt;font-weight:700;color:#fff;background:#1a3a6b;padding:3px 9px;margin-bottom:5px}
+  .section h3{font-size:10pt;font-weight:700;color:#1a3a6b;border-left:3px solid #1a3a6b;padding-left:6px;margin:6px 0 3px}
+  p{font-size:10pt;line-height:1.65;text-align:justify;margin-bottom:4px}
+  ul,ol{margin-left:18px;margin-top:2px;margin-bottom:4px}
+  li{font-size:10pt;line-height:1.6;text-align:justify}
+
+  table{width:100%;border-collapse:collapse;margin:4px 0;font-size:9pt}
   thead tr{background:#1a3a6b;color:#fff}
-  th,td{border:1px solid #aab;padding:5px 7px;vertical-align:middle}
+  th,td{border:1px solid #aab;padding:4px 6px;vertical-align:middle}
   tbody tr:nth-child(even){background:#f0f4ff}
 
-  .sup-box{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0}
-  .sup-card{flex:1;min-width:170px;border:1.5px solid #1a3a6b;border-radius:5px;padding:8px 12px;background:#f7f9ff}
-  .sup-card .role{font-size:7.5pt;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.7px}
-  .sup-card .name{font-size:10.5pt;font-weight:700;color:#1a3a6b;margin-top:2px}
-  .sup-card .dept{font-size:8.5pt;color:#555;margin-top:2px;line-height:1.4}
+  .sup-box{display:flex;gap:8px;flex-wrap:wrap;margin:5px 0}
+  .sup-card{flex:1;min-width:160px;border:1.5px solid #1a3a6b;border-radius:4px;padding:6px 10px;background:#f7f9ff}
+  .sup-card .role{font-size:7pt;font-weight:700;color:#888;text-transform:uppercase;letter-spacing:.6px}
+  .sup-card .name{font-size:10pt;font-weight:700;color:#1a3a6b;margin-top:2px}
+  .sup-card .dept{font-size:8pt;color:#555;margin-top:1px;line-height:1.35}
 
-  .cert-box{background:linear-gradient(135deg,#f7f9ff,#e8eeff);border:2px solid #1a3a6b;border-radius:6px;padding:16px 20px;text-align:center;margin:12px 0}
-  .cert-box p{font-size:10.5pt;line-height:1.8}
+  .cert-box{background:linear-gradient(135deg,#f7f9ff,#e8eeff);border:1.5px solid #1a3a6b;border-radius:5px;padding:12px 16px;text-align:center;margin:8px 0}
+  .cert-box p{font-size:10pt;line-height:1.7}
 
-  .sig-row{display:flex;justify-content:space-between;margin-top:24px;flex-wrap:wrap;gap:12px}
-  .sig-block{text-align:center;min-width:100px}
-  .sig-line{border-top:1px solid #333;padding-top:3px;font-size:9.5pt;line-height:1.5}
+  .sig-row{display:flex;justify-content:space-between;margin-top:16px;flex-wrap:wrap;gap:8px}
+  .sig-block{text-align:center;min-width:90px}
+  .sig-line{border-top:1px solid #333;padding-top:3px;font-size:9pt;line-height:1.4}
 
-  .info-box{background:#fffbea;border-left:4px solid #e6a817;padding:8px 12px;margin:8px 0;border-radius:0 4px 4px 0}
-  .info-box p{margin:0;font-size:10.5pt}
+  .info-box{background:#fffbea;border-left:4px solid #e6a817;padding:6px 10px;margin:6px 0;border-radius:0 4px 4px 0}
+  .info-box p{margin:0;font-size:10pt}
 
-  .flow-step{display:flex;align-items:flex-start;gap:10px;margin-bottom:7px}
-  .step-num{background:#1a3a6b;color:#fff;font-weight:700;font-size:9.5pt;width:23px;height:23px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+  .flow-step{display:flex;align-items:flex-start;gap:8px;margin-bottom:5px}
+  .step-num{background:#1a3a6b;color:#fff;font-weight:700;font-size:9pt;width:21px;height:21px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
 
-  code{background:#f0f4ff;padding:1px 4px;border-radius:3px;font-size:9.5pt;color:#1a3a6b}
+  code{background:#f0f4ff;padding:1px 4px;border-radius:3px;font-size:9pt;color:#1a3a6b}
 
-  /* PRINT FOOTER - always at page bottom */
   footer.pf{
     position:absolute;
-    bottom:10mm;
-    left:22mm;
-    right:18mm;
+    bottom:7mm;
+    left:20mm;
+    right:16mm;
     display:flex;
     justify-content:space-between;
-    font-size:8pt;
+    font-size:7.5pt;
     color:#888;
     border-top:1px solid #ddd;
-    padding-top:3px;
+    padding-top:2px;
+  }
+
+  .code-block{
+    background:#f0f4ff;
+    border:1px solid #c0c8d8;
+    border-radius:4px;
+    padding:6px 10px;
+    font-family:monospace;
+    font-size:8.5pt;
+    line-height:1.55;
+    margin-bottom:8px;
   }
 
   @media print{
@@ -95,7 +114,7 @@
       min-height:unset;
       max-height:297mm;
       margin:0;
-      padding:12mm 16mm 20mm 20mm;
+      padding:10mm 16mm 22mm 20mm;
       box-shadow:none;
       page-break-after:always;
       break-after:page;
@@ -106,7 +125,7 @@
     .page:last-child{page-break-after:auto;break-after:auto}
     footer.pf{
       position:absolute;
-      bottom:8mm;
+      bottom:7mm;
       left:20mm;
       right:16mm;
     }
@@ -139,7 +158,7 @@
   <div class="title-block">
     <div class="label">A Major Project Report Submitted in Partial Fulfillment of</div>
     <div class="label">Bachelor of Technology (B.Tech.) – Computer Science &amp; Engineering (IoT)</div>
-    <div style="height:8px"></div>
+    <div style="height:6px"></div>
     <div class="proj-title">AI-Powered Data Analysis Dashboard</div>
     <div class="sub">An Interactive Web-Based Platform for Data Visualization,<br/>Trend Forecasting, Correlation Analysis &amp; AI-Driven Business Insights</div>
   </div>
@@ -173,13 +192,13 @@
     </table>
   </div>
 
-  <p style="text-align:center;font-size:10pt;margin-top:8px"><strong>Academic Year:</strong> 2025–2026 &nbsp;|&nbsp; <strong>Semester:</strong> VIII (Final Year) &nbsp;|&nbsp; <strong>Batch:</strong> 2022–2026</p>
+  <p style="text-align:center;font-size:9.5pt;margin-top:6px"><strong>Academic Year:</strong> 2025–2026 &nbsp;|&nbsp; <strong>Semester:</strong> VIII (Final Year) &nbsp;|&nbsp; <strong>Batch:</strong> 2022–2026</p>
 
   <div class="sig-row">
-    <div class="sig-block"><div class="sig-line">Prof. Manoj Kumar<br/><span style="font-size:8pt;color:#555">Project Guide</span></div></div>
-    <div class="sig-block"><div class="sig-line">Prof. Uttam Kumar<br/><span style="font-size:8pt;color:#555">Project Coordinator</span></div></div>
-    <div class="sig-block"><div class="sig-line">Head of Department<br/><span style="font-size:8pt;color:#555">CSE (IoT), GEC Vaishali</span></div></div>
-    <div class="sig-block"><div class="sig-line">Principal<br/><span style="font-size:8pt;color:#555">GEC Vaishali</span></div></div>
+    <div class="sig-block"><div class="sig-line">Prof. Manoj Kumar<br/><span style="font-size:7.5pt;color:#555">Project Guide</span></div></div>
+    <div class="sig-block"><div class="sig-line">Prof. Uttam Kumar<br/><span style="font-size:7.5pt;color:#555">Project Coordinator</span></div></div>
+    <div class="sig-block"><div class="sig-line">Head of Department<br/><span style="font-size:7.5pt;color:#555">CSE (IoT), GEC Vaishali</span></div></div>
+    <div class="sig-block"><div class="sig-line">Principal<br/><span style="font-size:7.5pt;color:#555">GEC Vaishali</span></div></div>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 1</span></footer>
 </div>
@@ -193,12 +212,12 @@
       <img src="https://www.gecvaishali.ac.in/wp-content/uploads/2026/03/logo-1.png" alt="GEC" onerror="this.style.display='none'"/>
     </div>
   </div>
-  <div class="title-block"><div class="proj-title" style="font-size:13pt">CERTIFICATE OF APPROVAL</div></div>
+  <div class="title-block"><div class="proj-title" style="font-size:12.5pt">CERTIFICATE OF APPROVAL</div></div>
   <div class="cert-box">
     <p>This is to certify that the project entitled</p>
-    <p style="font-size:12pt;font-weight:700;color:#1a3a6b;margin:6px 0">"AI-Powered Data Analysis Dashboard"</p>
+    <p style="font-size:11.5pt;font-weight:700;color:#1a3a6b;margin:5px 0">"AI-Powered Data Analysis Dashboard"</p>
     <p>has been satisfactorily completed and submitted by the following students of <strong>B.Tech. – Computer Science &amp; Engineering (IoT), VIII Semester</strong> at <strong>Government Engineering College, Vaishali</strong>, in partial fulfillment of the requirements for the award of the degree of <strong>Bachelor of Technology</strong>.</p>
-    <p style="margin-top:8px">The project work is found to be original, carried out under the guidance of <strong>Prof. Manoj Kumar</strong> and coordinated by <strong>Prof. Uttam Kumar</strong> during the academic year <strong>2025–2026</strong>.</p>
+    <p style="margin-top:6px">The project work is found to be original, carried out under the guidance of <strong>Prof. Manoj Kumar</strong> and coordinated by <strong>Prof. Uttam Kumar</strong> during the academic year <strong>2025–2026</strong>.</p>
   </div>
   <div class="section">
     <h3>Team Members</h3>
@@ -212,13 +231,13 @@
       </tbody>
     </table>
   </div>
-  <p style="text-align:center;margin-top:12px;font-size:9.5pt;color:#555">Date: ______________________ &nbsp;&nbsp;|&nbsp;&nbsp; Place: Government Engineering College, Vaishali, Bihar</p>
-  <div class="sig-row" style="margin-top:30px">
-    <div class="sig-block"><div class="sig-line">Prof. Manoj Kumar<br/><span style="font-size:8pt;color:#555">Project Guide</span></div></div>
-    <div class="sig-block"><div class="sig-line">Prof. Uttam Kumar<br/><span style="font-size:8pt;color:#555">Coordinator</span></div></div>
-    <div class="sig-block"><div class="sig-line">External Examiner<br/><span style="font-size:8pt;color:#555">BEU / AICTE</span></div></div>
-    <div class="sig-block"><div class="sig-line">Head of Dept.<br/><span style="font-size:8pt;color:#555">CSE (IoT)</span></div></div>
-    <div class="sig-block"><div class="sig-line">Principal<br/><span style="font-size:8pt;color:#555">GEC Vaishali</span></div></div>
+  <p style="text-align:center;margin-top:10px;font-size:9pt;color:#555">Date: ______________________ &nbsp;&nbsp;|&nbsp;&nbsp; Place: Government Engineering College, Vaishali, Bihar</p>
+  <div class="sig-row" style="margin-top:22px">
+    <div class="sig-block"><div class="sig-line">Prof. Manoj Kumar<br/><span style="font-size:7.5pt;color:#555">Project Guide</span></div></div>
+    <div class="sig-block"><div class="sig-line">Prof. Uttam Kumar<br/><span style="font-size:7.5pt;color:#555">Coordinator</span></div></div>
+    <div class="sig-block"><div class="sig-line">External Examiner<br/><span style="font-size:7.5pt;color:#555">BEU / AICTE</span></div></div>
+    <div class="sig-block"><div class="sig-line">Head of Dept.<br/><span style="font-size:7.5pt;color:#555">CSE (IoT)</span></div></div>
+    <div class="sig-block"><div class="sig-line">Principal<br/><span style="font-size:7.5pt;color:#555">GEC Vaishali</span></div></div>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 2</span></footer>
 </div>
@@ -229,12 +248,12 @@
     <img src="https://www.gecvaishali.ac.in/wp-content/uploads/2026/03/logo-1.png" alt="logo" onerror="this.style.display='none'"/>
     <div class="mini-header-text"><h2>Government Engineering College, Vaishali</h2><p>B.Tech. Final Year Project Report – 2025–26 | CSE (IoT)</p></div>
   </div>
-  <div class="title-block"><div class="proj-title" style="font-size:13pt">DECLARATION BY STUDENTS</div></div>
-  <div style="margin-top:14px">
+  <div class="title-block"><div class="proj-title" style="font-size:12.5pt">DECLARATION BY STUDENTS</div></div>
+  <div style="margin-top:10px">
     <p>We, the undersigned students of B.Tech. (Computer Science &amp; Engineering – IoT), VIII Semester, Government Engineering College, Vaishali, hereby declare that the project report entitled:</p>
-    <p style="text-align:center;font-size:12pt;font-weight:700;color:#1a3a6b;margin:12px 0">"AI-Powered Data Analysis Dashboard"</p>
+    <p style="text-align:center;font-size:11.5pt;font-weight:700;color:#1a3a6b;margin:10px 0">"AI-Powered Data Analysis Dashboard"</p>
     <p>submitted in partial fulfillment of the requirements for the award of the degree of <strong>Bachelor of Technology</strong> is a record of original work done by us under the supervision and guidance of <strong>Prof. Manoj Kumar</strong> and coordination of <strong>Prof. Uttam Kumar</strong>, Department of Computer Science &amp; Engineering (IoT), Government Engineering College, Vaishali.</p>
-    <p style="margin-top:10px">We further declare that:</p>
+    <p style="margin-top:8px">We further declare that:</p>
     <ul>
       <li>The work embodied in this report has not been submitted for the award of any other degree or diploma at this or any other institution.</li>
       <li>Wherever references have been made to the work of others, it has been clearly indicated in the text and included in the bibliography.</li>
@@ -243,13 +262,13 @@
       <li>All data collected and used in this project are genuine and have not been falsified or manipulated in any manner.</li>
     </ul>
   </div>
-  <div class="sig-row" style="margin-top:40px">
-    <div class="sig-block"><div class="sig-line">Amarjeet Kumar<br/><span style="font-size:8pt;color:#555">22155135005</span></div></div>
-    <div class="sig-block"><div class="sig-line">Shanu Kumar<br/><span style="font-size:8pt;color:#555">22155135026</span></div></div>
-    <div class="sig-block"><div class="sig-line">Kartik Raj<br/><span style="font-size:8pt;color:#555">22155135023</span></div></div>
-    <div class="sig-block"><div class="sig-line">Krishna Murari<br/><span style="font-size:8pt;color:#555">22155125051</span></div></div>
+  <div class="sig-row" style="margin-top:32px">
+    <div class="sig-block"><div class="sig-line">Amarjeet Kumar<br/><span style="font-size:7.5pt;color:#555">22155135005</span></div></div>
+    <div class="sig-block"><div class="sig-line">Shanu Kumar<br/><span style="font-size:7.5pt;color:#555">22155135026</span></div></div>
+    <div class="sig-block"><div class="sig-line">Kartik Raj<br/><span style="font-size:7.5pt;color:#555">22155135023</span></div></div>
+    <div class="sig-block"><div class="sig-line">Krishna Murari<br/><span style="font-size:7.5pt;color:#555">22155125051</span></div></div>
   </div>
-  <p style="margin-top:18px;font-size:10pt"><strong>Date:</strong> ______________________ &nbsp;&nbsp;&nbsp; <strong>Place:</strong> GEC Vaishali, Bihar</p>
+  <p style="margin-top:14px;font-size:10pt"><strong>Date:</strong> ______________________ &nbsp;&nbsp;&nbsp; <strong>Place:</strong> GEC Vaishali, Bihar</p>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 3</span></footer>
 </div>
 
@@ -259,16 +278,16 @@
     <img src="https://www.gecvaishali.ac.in/wp-content/uploads/2026/03/logo-1.png" alt="logo" onerror="this.style.display='none'"/>
     <div class="mini-header-text"><h2>Government Engineering College, Vaishali</h2><p>B.Tech. Final Year Project Report – 2025–26 | CSE (IoT)</p></div>
   </div>
-  <div class="title-block"><div class="proj-title" style="font-size:13pt">ACKNOWLEDGEMENT</div></div>
-  <div style="margin-top:12px">
+  <div class="title-block"><div class="proj-title" style="font-size:12.5pt">ACKNOWLEDGEMENT</div></div>
+  <div style="margin-top:8px">
     <p>The successful completion of this project is a result of combined effort, support, and guidance of several individuals, and we take this opportunity to extend our sincere gratitude to all of them.</p>
-    <p style="margin-top:8px">We express our deepest sense of gratitude and reverence to our <strong>Project Guide, Prof. Manoj Kumar</strong>, Department of Computer Science &amp; Engineering (IoT), Government Engineering College, Vaishali, for his invaluable guidance, motivation, and continuous encouragement throughout the duration of this project. His technical expertise, constructive criticism, and dedication greatly enhanced our understanding of the subject and helped us overcome several challenges during the development process.</p>
-    <p style="margin-top:8px">We are also deeply grateful to our <strong>Project Coordinator, Prof. Uttam Kumar</strong>, Department of Computer Science &amp; Engineering (IoT), GEC Vaishali, for his timely coordination, administrative support, and constructive feedback. His suggestions and guidance helped us stay on track and complete the project within the stipulated timeline.</p>
-    <p style="margin-top:8px">We extend our sincere thanks to the <strong>Head of Department, CSE (IoT)</strong>, Government Engineering College, Vaishali, for providing us with the necessary departmental infrastructure and resources required to complete this project effectively.</p>
-    <p style="margin-top:8px">We are thankful to the <strong>Principal, Prof. Anant Kumar</strong>, Government Engineering College, Vaishali, for his visionary leadership and for creating an academic environment conducive to innovation and research.</p>
-    <p style="margin-top:8px">We also acknowledge the support of our classmates, seniors, and the technical staff of the Computer Science Department for their assistance during the testing and debugging phases of the project.</p>
-    <p style="margin-top:8px">Lastly, we express our heartfelt gratitude to our <strong>parents and family members</strong> for their unconditional love, patience, and moral support throughout our academic journey.</p>
-    <p style="margin-top:16px;text-align:right"><strong>— Amarjeet Kumar, Shanu Kumar, Kartik Raj, Krishna Murari</strong><br/>B.Tech. VIII Semester, CSE (IoT), GEC Vaishali, 2025–26</p>
+    <p style="margin-top:6px">We express our deepest sense of gratitude and reverence to our <strong>Project Guide, Prof. Manoj Kumar</strong>, Department of Computer Science &amp; Engineering (IoT), Government Engineering College, Vaishali, for his invaluable guidance, motivation, and continuous encouragement throughout the duration of this project. His technical expertise, constructive criticism, and dedication greatly enhanced our understanding of the subject and helped us overcome several challenges during the development process.</p>
+    <p style="margin-top:6px">We are also deeply grateful to our <strong>Project Coordinator, Prof. Uttam Kumar</strong>, Department of Computer Science &amp; Engineering (IoT), GEC Vaishali, for his timely coordination, administrative support, and constructive feedback. His suggestions and guidance helped us stay on track and complete the project within the stipulated timeline.</p>
+    <p style="margin-top:6px">We extend our sincere thanks to the <strong>Head of Department, CSE (IoT)</strong>, Government Engineering College, Vaishali, for providing us with the necessary departmental infrastructure and resources required to complete this project effectively.</p>
+    <p style="margin-top:6px">We are thankful to the <strong>Principal, Prof. Anant Kumar</strong>, Government Engineering College, Vaishali, for his visionary leadership and for creating an academic environment conducive to innovation and research.</p>
+    <p style="margin-top:6px">We also acknowledge the support of our classmates, seniors, and the technical staff of the Computer Science Department for their assistance during the testing and debugging phases of the project.</p>
+    <p style="margin-top:6px">Lastly, we express our heartfelt gratitude to our <strong>parents and family members</strong> for their unconditional love, patience, and moral support throughout our academic journey.</p>
+    <p style="margin-top:12px;text-align:right"><strong>— Amarjeet Kumar, Shanu Kumar, Kartik Raj, Krishna Murari</strong><br/>B.Tech. VIII Semester, CSE (IoT), GEC Vaishali, 2025–26</p>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 4</span></footer>
 </div>
@@ -279,14 +298,14 @@
     <img src="https://www.gecvaishali.ac.in/wp-content/uploads/2026/03/logo-1.png" alt="logo" onerror="this.style.display='none'"/>
     <div class="mini-header-text"><h2>Government Engineering College, Vaishali</h2><p>B.Tech. Final Year Project Report – 2025–26 | CSE (IoT)</p></div>
   </div>
-  <div class="title-block"><div class="proj-title" style="font-size:13pt">ABSTRACT</div></div>
-  <div style="margin-top:12px">
+  <div class="title-block"><div class="proj-title" style="font-size:12.5pt">ABSTRACT</div></div>
+  <div style="margin-top:8px">
     <p>The <strong>AI-Powered Data Analysis Dashboard</strong> is a comprehensive, browser-based web application designed to empower users with powerful data analytics capabilities without requiring any specialized data science expertise. The system accepts CSV and Excel datasets through a user-friendly drag-and-drop interface and processes them in real-time to deliver rich analytical insights.</p>
-    <p style="margin-top:8px">The platform incorporates multiple analytical modules including automated KPI dashboards, statistical summary generation, data quality assessment, interactive data visualizations, trend forecasting using linear regression, correlation heatmaps using Pearson correlation coefficient, an AI-powered conversational chatbot, and an automated report generator.</p>
-    <p style="margin-top:8px">The application is built using modern frontend technologies: <strong>React.js</strong> for component-based UI, <strong>Recharts</strong> for data visualization, <strong>PapaParse</strong> and <strong>SheetJS</strong> for file parsing, and <strong>Lodash.js</strong> for data manipulation. AI capabilities are powered by the <strong>Groq API</strong> running the <strong>LLaMA 3.3 70B Versatile</strong> language model, which handles natural language queries and business report generation in real-time.</p>
-    <p style="margin-top:8px">The project bridges the gap between raw business data and actionable insights. It demonstrates the practical convergence of <strong>Artificial Intelligence</strong>, <strong>Data Science</strong>, and <strong>Internet of Things (IoT)</strong> technologies for real-world business analytics applications. The system is completely client-side, requiring no server infrastructure, making it lightweight, portable, and instantly deployable.</p>
-    <p style="margin-top:8px">Evaluation results indicate that the platform successfully processes datasets of up to 10,000+ rows within seconds, generates accurate forecasts and correlation matrices, and provides contextually relevant AI responses to dataset-specific queries. The system has significant potential for use by business analysts, students, educators, and small enterprises seeking affordable yet powerful data analytics solutions.</p>
-    <div class="info-box" style="margin-top:12px">
+    <p style="margin-top:6px">The platform incorporates multiple analytical modules including automated KPI dashboards, statistical summary generation, data quality assessment, interactive data visualizations, trend forecasting using linear regression, correlation heatmaps using Pearson correlation coefficient, an AI-powered conversational chatbot, and an automated report generator.</p>
+    <p style="margin-top:6px">The application is built using modern frontend technologies: <strong>React.js</strong> for component-based UI, <strong>Recharts</strong> for data visualization, <strong>PapaParse</strong> and <strong>SheetJS</strong> for file parsing, and <strong>Lodash.js</strong> for data manipulation. AI capabilities are powered by the <strong>Groq API</strong> running the <strong>LLaMA 3.3 70B Versatile</strong> language model, which handles natural language queries and business report generation in real-time.</p>
+    <p style="margin-top:6px">The project bridges the gap between raw business data and actionable insights. It demonstrates the practical convergence of <strong>Artificial Intelligence</strong>, <strong>Data Science</strong>, and <strong>Internet of Things (IoT)</strong> technologies for real-world business analytics applications. The system is completely client-side, requiring no server infrastructure, making it lightweight, portable, and instantly deployable.</p>
+    <p style="margin-top:6px">Evaluation results indicate that the platform successfully processes datasets of up to 10,000+ rows within seconds, generates accurate forecasts and correlation matrices, and provides contextually relevant AI responses to dataset-specific queries. The system has significant potential for use by business analysts, students, educators, and small enterprises seeking affordable yet powerful data analytics solutions.</p>
+    <div class="info-box" style="margin-top:10px">
       <p><strong>Keywords:</strong> Artificial Intelligence, Data Analytics, React.js, Data Visualization, Linear Regression, Pearson Correlation, LLaMA 3.3, Groq API, IoT, Business Intelligence, Machine Learning, Dashboard</p>
     </div>
   </div>
@@ -299,8 +318,8 @@
     <img src="https://www.gecvaishali.ac.in/wp-content/uploads/2026/03/logo-1.png" alt="logo" onerror="this.style.display='none'"/>
     <div class="mini-header-text"><h2>Government Engineering College, Vaishali</h2><p>B.Tech. Final Year Project Report – 2025–26 | CSE (IoT)</p></div>
   </div>
-  <div class="title-block"><div class="proj-title" style="font-size:13pt">TABLE OF CONTENTS</div></div>
-  <table style="margin-top:10px;font-size:9.5pt">
+  <div class="title-block"><div class="proj-title" style="font-size:12.5pt">TABLE OF CONTENTS</div></div>
+  <table style="margin-top:8px;font-size:9pt">
     <thead><tr><th>S.No.</th><th>Chapter / Section</th><th>Page No.</th></tr></thead>
     <tbody>
       <tr><td>—</td><td>Cover Page</td><td>1</td></tr>
@@ -344,8 +363,8 @@
     <img src="https://www.gecvaishali.ac.in/wp-content/uploads/2026/03/logo-1.png" alt="logo" onerror="this.style.display='none'"/>
     <div class="mini-header-text"><h2>Government Engineering College, Vaishali</h2><p>B.Tech. Final Year Project Report – 2025–26 | CSE (IoT)</p></div>
   </div>
-  <div class="title-block"><div class="proj-title" style="font-size:13pt">LIST OF FIGURES &amp; TABLES</div></div>
-  <div class="section" style="margin-top:12px">
+  <div class="title-block"><div class="proj-title" style="font-size:12.5pt">LIST OF FIGURES &amp; TABLES</div></div>
+  <div class="section" style="margin-top:8px">
     <h3>List of Figures</h3>
     <table>
       <thead><tr><th>Figure No.</th><th>Description</th><th>Page</th></tr></thead>
@@ -366,7 +385,7 @@
       </tbody>
     </table>
   </div>
-  <div class="section" style="margin-top:12px">
+  <div class="section" style="margin-top:8px">
     <h3>List of Tables</h3>
     <table>
       <thead><tr><th>Table No.</th><th>Description</th><th>Page</th></tr></thead>
@@ -542,7 +561,7 @@
         <tr><td>React Hooks</td><td>—</td><td>useState, useEffect, useCallback for state management</td></tr>
       </tbody>
     </table>
-    <h3 style="margin-top:10px">6.1 Why These Technologies?</h3>
+    <h3 style="margin-top:8px">6.1 Why These Technologies?</h3>
     <p><strong>React.js</strong> was chosen for its component-based architecture, which enables modular development and clean separation of concerns. Its virtual DOM ensures efficient re-rendering when data or chart state changes.</p>
     <p><strong>Groq API with LLaMA 3.3 70B</strong> was selected for its exceptional inference speed (typically &lt;2 seconds for responses), generous free-tier limits, and the model's strong performance on structured data reasoning tasks.</p>
     <p><strong>PapaParse</strong> is the leading JavaScript CSV library, handling edge cases like quoted fields, multi-line values, and automatic type detection. <strong>SheetJS</strong> is the de-facto standard for Excel processing in browser environments. Custom JavaScript implementations of linear regression and Pearson correlation were preferred over importing ML libraries to minimize bundle size and maintain full transparency of the algorithmic logic.</p>
@@ -566,14 +585,7 @@
       <li><strong>Excel (.xlsx, .xls):</strong> Processed using SheetJS. The file is read as an ArrayBuffer, the first sheet is extracted, and converted to JSON via <code>XLSX.utils.sheet_to_json()</code>.</li>
     </ul>
     <h3>7.3 Post-Parse Pipeline</h3>
-    <p>Once parsed, the data array and headers array are extracted and stored in React state. The application immediately triggers a pipeline of analytical functions:</p>
-    <ul>
-      <li><code>genInsights()</code> — generates textual insights about the dataset structure</li>
-      <li><code>calcStats()</code> — computes mean, sum, max, min for all numeric columns</li>
-      <li><code>analyzeQuality()</code> — detects duplicates and missing values</li>
-      <li><code>genAlerts()</code> — creates business alerts based on data thresholds</li>
-      <li><code>genAIInsights()</code> — produces top performer and profit margin insights</li>
-    </ul>
+    <p>Once parsed, the data array and headers array are extracted and stored in React state. The application immediately triggers a pipeline of analytical functions: <code>genInsights()</code> for textual dataset insights, <code>calcStats()</code> for mean/sum/max/min computation, <code>analyzeQuality()</code> for duplicate and missing value detection, <code>genAlerts()</code> for threshold-based business alerts, and <code>genAIInsights()</code> for top performer and profit margin calculations.</p>
     <h3>7.4 Loading Animation</h3>
     <p>During the processing phase, a custom multi-panel animated loading screen is displayed featuring an animated bar chart, smooth wave line chart, spinning pie chart, and bouncing processing dots. All animations are implemented using CSS keyframes with staggered delays for a polished user experience.</p>
     <h3>7.5 Error Handling</h3>
@@ -591,23 +603,13 @@
   <div class="section">
     <h2>Chapter 8: Module – KPI Dashboard &amp; Data Quality</h2>
     <h3>8.1 KPI Auto-Detection</h3>
-    <p>The KPI module uses keyword-based column name matching to automatically detect and compute relevant business metrics. Column names are checked (case-insensitively) against keyword lists:</p>
-    <ul>
-      <li><strong>Sales/Revenue:</strong> columns matching 'sales', 'revenue', 'amount' → Total Sales, Avg Order Value</li>
-      <li><strong>Profit:</strong> columns matching 'profit' → Total Profit / Loss</li>
-      <li><strong>Products:</strong> columns matching 'product', 'item', 'name' → Unique Product Count</li>
-    </ul>
-    <p>KPI values are formatted in Indian numbering convention (₹ symbol, en-IN locale) appropriate for Indian business datasets. Color coding distinguishes positive metrics (green/blue) from negative ones (red).</p>
+    <p>The KPI module uses keyword-based column name matching to automatically detect and compute relevant business metrics. Column names are checked (case-insensitively) against keyword lists for sales/revenue columns (matching 'sales', 'revenue', 'amount'), profit columns (matching 'profit'), and product columns (matching 'product', 'item', 'name'). KPI values are formatted in Indian numbering convention with ₹ symbol, and color coding distinguishes positive metrics from negative ones.</p>
     <h3>8.2 AI Business Insights</h3>
-    <p>The <code>genAIInsights()</code> function produces two critical business insights purely from client-side computation:</p>
-    <ul>
-      <li><strong>Top Performer Detection:</strong> Groups data by product/category, sums sales, identifies the highest-performing entity.</li>
-      <li><strong>Profit Margin Analysis:</strong> Calculates overall profit margin (Profit/Sales × 100) and classifies it as healthy (&gt;15%) or needing optimization.</li>
-    </ul>
+    <p>The <code>genAIInsights()</code> function produces two critical business insights purely from client-side computation: <strong>Top Performer Detection</strong> (groups data by product/category, sums sales, identifies the highest-performing entity) and <strong>Profit Margin Analysis</strong> (calculates overall profit margin and classifies it as healthy &gt;15% or needing optimization).</p>
     <h3>8.3 Alerts System</h3>
     <p>The Alerts module flags potential data issues and business risks in real time. Two types of alerts are generated: a <strong>Duplicate Records Warning</strong> (triggered if Lodash's deep equality check finds duplicate rows) and a <strong>Low Sales Alert</strong> (triggered if more than 30% of sales records fall below 50% of the average sales value).</p>
     <h3>8.4 Data Quality Report</h3>
-    <p>A three-metric data quality panel displays: total row count, number of duplicate records, and count of columns with missing values. Color coding (green/orange) provides immediate visual feedback on data health. This helps users identify data cleanliness issues before making analytical decisions.</p>
+    <p>A three-metric data quality panel displays total row count, number of duplicate records, and count of columns with missing values. Color coding (green/orange) provides immediate visual feedback on data health, helping users identify data cleanliness issues before making analytical decisions.</p>
     <h3>8.5 Top/Bottom Performer Analysis</h3>
     <p>The system automatically identifies the Top 5 and Bottom 5 performing products/categories by total sales, displayed in ranked lists with color-coded rank badges. This provides instant business intelligence about which products drive revenue and which may need attention or discontinuation.</p>
   </div>
@@ -647,7 +649,7 @@
   <div class="section">
     <h2>Chapter 10: Module – Trend Forecasting Engine</h2>
     <h3>10.1 Algorithm: Linear Regression</h3>
-    <p>The forecasting module implements <strong>Ordinary Least Squares (OLS) Linear Regression</strong> natively in JavaScript. The algorithm fits a line y = mx + b through the historical time series data, where m is the slope (rate of change) and b is the intercept. Given n data points, the slope and intercept are computed as:</p>
+    <p>The forecasting module implements <strong>Ordinary Least Squares (OLS) Linear Regression</strong> natively in JavaScript. The algorithm fits a line y = mx + b through the historical time series data, where m is the slope (rate of change) and b is the intercept. Given n data points, slope and intercept are computed as:</p>
     <div class="info-box">
       <p><strong>slope (m)</strong> = (n·Σxy − Σx·Σy) / (n·Σx² − (Σx)²)</p>
       <p><strong>intercept (b)</strong> = (Σy − m·Σx) / n &nbsp;&nbsp;|&nbsp;&nbsp; <strong>predict(x)</strong> = m·x + b</p>
@@ -655,11 +657,11 @@
     <h3>10.2 Implementation Details</h3>
     <p>The function <code>linearRegression(values)</code> takes an array of numeric values as input, treating the array index as the time variable x. It returns an object containing the slope, intercept, and a <code>predict(x)</code> closure function. A minimum of 2 data points is required; for fewer points, the function returns default zero values.</p>
     <h3>10.3 Forecast Generation</h3>
-    <p>The <code>getForecastData()</code> function first obtains the time series using <code>getTimeSeriesData()</code>, applies the regression model, and generates three datasets for the chart: actual Sales values, a Trend line showing the regression fit over historical data, and Forecast values for 5 future periods (labeled F+1 through F+5).</p>
+    <p>The <code>getForecastData()</code> function first obtains the time series using <code>getTimeSeriesData()</code>, applies the regression model, and generates three datasets: actual Sales values, a Trend line showing the regression fit over historical data, and Forecast values for 5 future periods (labeled F+1 through F+5).</p>
     <h3>10.4 Slope Interpretation</h3>
-    <p>The slope value is displayed prominently with contextual interpretation: a positive slope indicates an upward business trend, while a negative slope signals declining performance. This provides immediate, actionable insight without requiring the user to interpret the chart themselves.</p>
+    <p>The slope value is displayed with contextual interpretation: a positive slope indicates an upward business trend, while a negative slope signals declining performance. This provides immediate, actionable insight without requiring the user to interpret the chart themselves.</p>
     <h3>10.5 Forecast Summary Table</h3>
-    <p>Below the chart, a summary table displays the predicted value for each of the 5 future periods in individual cards. Values are formatted to 2 decimal places and highlighted in amber color to distinguish them from historical actuals.</p>
+    <p>Below the chart, a summary table displays the predicted value for each of the 5 future periods in individual cards, formatted to 2 decimal places and highlighted in amber color to distinguish them from historical actuals.</p>
     <h3>10.6 Limitations</h3>
     <p>The linear regression model assumes a linear trend, which may not capture cyclical or seasonal patterns. Future work could incorporate ARIMA or Holt-Winters seasonal decomposition for more sophisticated forecasting on seasonal business datasets.</p>
   </div>
@@ -682,17 +684,11 @@
     <h3>11.2 Matrix Computation</h3>
     <p>The <code>getCorrMatrix()</code> function extracts up to 6 numeric columns from the dataset. For each pair of columns (A, B), it filters both to only include rows where both values are numeric (handling missing data), then computes the Pearson r value rounded to 2 decimal places. The result is an n×n symmetric matrix where the diagonal always equals 1.0.</p>
     <h3>11.3 Color Encoding</h3>
-    <p>The heatmap cell colors encode correlation strength visually:</p>
-    <ul>
-      <li><strong>Dark Green (r &gt; 0.7):</strong> Strong positive correlation — variables move together closely</li>
-      <li><strong>Light Green (0.4 &lt; r ≤ 0.7):</strong> Moderate positive correlation</li>
-      <li><strong>Pale Green (0.1 &lt; r ≤ 0.4):</strong> Weak positive correlation</li>
-      <li><strong>Purple (diagonal, r = 1.0):</strong> Self-correlation</li>
-      <li><strong>Dark Red (r &lt; −0.7):</strong> Strong negative correlation</li>
-      <li><strong>Light Red (−0.7 ≤ r &lt; −0.4):</strong> Moderate negative correlation</li>
-    </ul>
+    <p>Heatmap cell colors encode correlation strength: <strong>Dark Green (r &gt; 0.7)</strong> for strong positive correlation, <strong>Light Green (0.4–0.7)</strong> for moderate positive, <strong>Pale Green (0.1–0.4)</strong> for weak positive, <strong>Purple (diagonal, r = 1.0)</strong> for self-correlation, <strong>Dark Red (r &lt; −0.7)</strong> for strong negative, and <strong>Light Red (−0.7 to −0.4)</strong> for moderate negative correlation.</p>
     <h3>11.4 Business Interpretation</h3>
     <p>For business datasets, strong positive correlations between Sales and Profit suggest healthy margins across products. A negative correlation between Discount and Profit would indicate that discounting strategies are eroding profitability. The heatmap makes these relationships immediately apparent without any statistical background from the user.</p>
+    <h3>11.5 Performance Consideration</h3>
+    <p>To maintain browser responsiveness, the heatmap is limited to a maximum of 6 numeric columns, and computation uses <code>Array.slice()</code> to cap at the minimum available length, keeping complexity at O(6² × n). All correlation values are computed once on file load and cached in React state.</p>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 18</span></footer>
 </div>
@@ -762,7 +758,7 @@
     <h3>14.1 Development Approach</h3>
     <p>The project was developed iteratively over approximately 8 weeks following an Agile-inspired approach with weekly review cycles. Each team member was assigned ownership of specific modules while the team lead (Amarjeet Kumar) maintained overall integration and architecture consistency.</p>
     <h3>14.2 Module-wise Feature Summary</h3>
-    <table style="font-size:9pt">
+    <table style="font-size:8.5pt">
       <thead><tr><th>Module</th><th>Key Functions</th><th>~LOC</th><th>Developer</th></tr></thead>
       <tbody>
         <tr><td>File Upload &amp; Parsing</td><td>processFile(), drag handlers</td><td>80</td><td>Shanu Kumar</td></tr>
@@ -777,7 +773,7 @@
         <tr><td>Data Table</td><td>getFiltered(), column filter</td><td>30</td><td>Kartik Raj</td></tr>
       </tbody>
     </table>
-    <h3 style="margin-top:10px">14.3 State Management</h3>
+    <h3 style="margin-top:6px">14.3 State Management</h3>
     <p>The application uses 20+ React state variables managed via <code>useState</code> hooks. Key state includes: <code>data</code> (parsed dataset array), <code>headers</code> (column names), <code>activeTab</code> (current view), <code>chatMessages</code> (conversation history), <code>report</code> (generated report text), <code>loading</code> (file processing status), and <code>isDragging</code> (drag-over detection).</p>
     <h3>14.4 Performance Considerations</h3>
     <p>To maintain responsiveness on large datasets, the application limits chart rendering to the top 10–15 entries, the data table preview to 100 rows, and AI API context to 50–80 rows. All heavy computations (stats, correlation, regression) are triggered once on file load and cached in React state, not recomputed on every render.</p>
@@ -801,7 +797,7 @@
       <li><strong>Student Marks Sheet (XLSX):</strong> 120 rows, 7 columns — non-business dataset, correlation testing</li>
     </ul>
     <h3>15.2 Test Results</h3>
-    <table style="font-size:9pt">
+    <table style="font-size:8.5pt">
       <thead><tr><th>Test Case</th><th>Expected Result</th><th>Actual Result</th><th>Status</th></tr></thead>
       <tbody>
         <tr><td>CSV file upload</td><td>Data parsed correctly</td><td>All rows and headers extracted</td><td>✅ Pass</td></tr>
@@ -831,16 +827,9 @@
   <div class="section">
     <h2>Chapter 16: Results &amp; Discussion</h2>
     <h3>16.1 Key Outcomes</h3>
-    <p>The project successfully achieved all 10 primary objectives. Key quantitative results from testing include:</p>
-    <ul>
-      <li>Average file processing time for a 10,000-row dataset: <strong>1.8 seconds</strong></li>
-      <li>Linear regression forecast accuracy (tested against known future data): <strong>MAE within 8%</strong> for stable trend datasets</li>
-      <li>Pearson correlation coefficient deviation from Python scipy.stats: <strong>&lt; 0.001</strong> (effectively identical)</li>
-      <li>AI Chat response time via Groq LLaMA 3.3: <strong>1.2 – 2.8 seconds</strong> average</li>
-      <li>AI Report generation time: <strong>3 – 7 seconds</strong> average</li>
-    </ul>
+    <p>The project successfully achieved all 10 primary objectives. Key quantitative results from testing include: average file processing time for a 10,000-row dataset of <strong>1.8 seconds</strong>, linear regression forecast accuracy within <strong>MAE of 8%</strong> for stable trend datasets, Pearson correlation coefficient deviation from Python scipy.stats of <strong>&lt; 0.001</strong> (effectively identical), AI Chat response time via Groq LLaMA 3.3 of <strong>1.2 – 2.8 seconds</strong> average, and AI Report generation time of <strong>3 – 7 seconds</strong> average.</p>
     <h3>16.2 Comparison with Existing Tools</h3>
-    <table style="font-size:9pt">
+    <table style="font-size:8.5pt">
       <thead><tr><th>Feature</th><th>Our Dashboard</th><th>Power BI</th><th>Google Looker</th><th>Excel</th></tr></thead>
       <tbody>
         <tr><td>Cost</td><td>Free</td><td>₹800+/mo</td><td>Free (limited)</td><td>₹400+/mo</td></tr>
@@ -852,7 +841,7 @@
         <tr><td>Setup Time</td><td>0 seconds</td><td>30+ mins</td><td>5 mins</td><td>10 mins</td></tr>
       </tbody>
     </table>
-    <h3 style="margin-top:10px">16.3 Discussion</h3>
+    <h3 style="margin-top:6px">16.3 Discussion</h3>
     <p>The results demonstrate that a lightweight browser-based application can deliver analytical capabilities comparable to enterprise tools for common business analytics use cases. The integration of LLaMA 3.3 via Groq API provides a particularly differentiating capability — natural language data querying — at zero additional cost. The primary limitation remains the 50–80 row context window for AI features, which may reduce accuracy on very large or complex datasets.</p>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 23</span></footer>
@@ -879,8 +868,8 @@
         <div class="dept">Assistant Professor, Dept. of CSE (IoT), GEC Vaishali<br/><em>Coordinated project timelines, milestone tracking, evaluation schedules, and documentation standards.</em></div>
       </div>
     </div>
-    <h3 style="margin-top:10px">17.2 Student Contributions</h3>
-    <table style="font-size:9pt">
+    <h3 style="margin-top:8px">17.2 Student Contributions</h3>
+    <table style="font-size:8.5pt">
       <thead><tr><th>Name</th><th>Reg. No.</th><th>Modules Developed</th><th>Skills Applied</th></tr></thead>
       <tbody>
         <tr><td><strong>Amarjeet Kumar</strong></td><td>22155135005</td><td>Architecture, UI/UX, AI Chat, Report Generator, Forecasting</td><td>React.js, Groq API, UX Design, JS ES6+</td></tr>
@@ -889,7 +878,7 @@
         <tr><td><strong>Krishna Murari</strong></td><td>22155125051</td><td>Correlation Heatmap, Pearson Algorithm, Linear Regression, Unit Testing</td><td>Mathematics, Linear Algebra, JavaScript</td></tr>
       </tbody>
     </table>
-    <h3 style="margin-top:10px">17.3 Team Collaboration</h3>
+    <h3 style="margin-top:8px">17.3 Team Collaboration</h3>
     <p>The team conducted weekly synchronization meetings and used version control principles for code management. Code reviews were conducted before integration to ensure quality. All team members contributed to the final documentation and presentation preparation.</p>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 24</span></footer>
@@ -904,17 +893,17 @@
   <div class="section">
     <h2>Chapter 18: Challenges Faced &amp; Solutions</h2>
     <h3>18.1 Dynamic Column Detection</h3>
-    <p><strong>Problem:</strong> Different datasets use different column naming conventions (e.g., "Revenue" vs "Sales" vs "Amount"). Building a system that automatically identifies the correct columns without user configuration was challenging.<br/><strong>Solution:</strong> Implemented keyword-based pattern matching using <code>String.includes()</code> on lowercase column names against arrays of common business keywords. This handles 90%+ of real-world business dataset naming variations.</p>
+    <p><strong>Problem:</strong> Different datasets use different column naming conventions. Building a system that automatically identifies the correct columns without user configuration was challenging. <strong>Solution:</strong> Implemented keyword-based pattern matching using <code>String.includes()</code> on lowercase column names against arrays of common business keywords, handling 90%+ of real-world naming variations.</p>
     <h3>18.2 AI Context Window Limitations</h3>
-    <p><strong>Problem:</strong> LLMs have token limits. Sending an entire 10,000-row dataset to the Groq API was infeasible.<br/><strong>Solution:</strong> Implemented a hybrid approach — send only the first 50–80 rows as raw data, but also include pre-computed statistical summaries (totals, averages, max/min) for all numeric columns simultaneously.</p>
+    <p><strong>Problem:</strong> LLMs have token limits. Sending an entire 10,000-row dataset to the Groq API was infeasible. <strong>Solution:</strong> Implemented a hybrid approach — send only the first 50–80 rows as raw data, but also include pre-computed statistical summaries (totals, averages, max/min) for all numeric columns simultaneously.</p>
     <h3>18.3 Responsive Chart Labels</h3>
-    <p><strong>Problem:</strong> Long product or category names caused overlap and illegibility, especially on mobile viewports.<br/><strong>Solution:</strong> Switched to horizontal bar charts for product comparisons, truncated category names to 18 characters, and applied 45-degree rotation to time-axis labels.</p>
+    <p><strong>Problem:</strong> Long product or category names caused overlap and illegibility, especially on mobile viewports. <strong>Solution:</strong> Switched to horizontal bar charts for product comparisons, truncated category names to 18 characters, and applied 45-degree rotation to time-axis labels.</p>
     <h3>18.4 Correlation Computation Performance</h3>
-    <p><strong>Problem:</strong> Computing n×n Pearson correlation matrices required nested loops over potentially thousands of data points, risking UI freezing on large datasets.<br/><strong>Solution:</strong> Limited the heatmap to a maximum of 6 numeric columns, and used <code>Array.slice()</code> to cap computation at the minimum available length, capping complexity at O(6² × n).</p>
+    <p><strong>Problem:</strong> Computing n×n Pearson correlation matrices required nested loops over potentially thousands of data points, risking UI freezing on large datasets. <strong>Solution:</strong> Limited the heatmap to a maximum of 6 numeric columns, and used <code>Array.slice()</code> to cap computation at the minimum available length, keeping complexity at O(6² × n).</p>
     <h3>18.5 Groq API Rate Limiting</h3>
-    <p><strong>Problem:</strong> The Groq free tier has rate limits that could interrupt user sessions during high-frequency AI chat usage.<br/><strong>Solution:</strong> Implemented robust try-catch error handling that displays readable error messages (including the specific API error code) within the chat interface.</p>
+    <p><strong>Problem:</strong> The Groq free tier has rate limits that could interrupt user sessions during high-frequency AI chat usage. <strong>Solution:</strong> Implemented robust try-catch error handling that displays readable error messages (including the specific API error code) within the chat interface without crashing the application.</p>
     <h3>18.6 Loading State Management</h3>
-    <p><strong>Problem:</strong> Large file processing took 1–3 seconds, during which the UI appeared frozen without feedback.<br/><strong>Solution:</strong> Implemented a rich multi-panel loading animation screen with animated bar charts, wave line charts, and spinning pie charts to maintain visual engagement during processing.</p>
+    <p><strong>Problem:</strong> Large file processing took 1–3 seconds, during which the UI appeared frozen. <strong>Solution:</strong> Implemented a rich multi-panel loading animation screen with animated bar charts, wave line charts, and spinning pie charts using CSS keyframes to maintain visual engagement and communicate processing status to the user during file analysis.</p>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 25</span></footer>
 </div>
@@ -934,15 +923,15 @@
     <h3>19.3 Multi-File Comparison</h3>
     <p>Enabling users to upload multiple datasets and compare metrics across them would add significant analytical value — for example, comparing this year's sales CSV with last year's to automatically calculate growth rates and flag regressions.</p>
     <h3>19.4 Natural Language Chart Creation</h3>
-    <p>Extending the AI chat to accept chart creation commands in natural language ("Show me a bar chart of top products by profit") would further democratize analytics. The LLM could generate Recharts configuration JSON from the natural language request, dynamically rendering new visualizations on demand.</p>
+    <p>Extending the AI chat to accept chart creation commands in natural language (e.g., "Show me a bar chart of top products by profit") would further democratize analytics. The LLM could generate Recharts configuration JSON from the natural language request, dynamically rendering new visualizations on demand.</p>
     <h3>19.5 PDF Report Export</h3>
     <p>The current report download is plain text. Future enhancement could generate professionally formatted PDF reports with embedded charts, tables, and institutional branding using libraries like jsPDF and html2canvas.</p>
     <h3>19.6 Multi-User Collaboration</h3>
     <p>Adding authentication and cloud storage (Firebase or Supabase) would enable teams to share datasets and analytical views, adding comments and annotations to charts and reports collaboratively in real-time.</p>
     <h3>19.7 IoT Data Streams Integration</h3>
-    <p>Given the CSE (IoT) specialization of the team, a compelling future direction is direct integration with IoT sensor data streams via MQTT or WebSocket protocols — enabling real-time monitoring dashboards for industrial sensors, environmental monitoring, or smart campus applications.</p>
+    <p>Given the CSE (IoT) specialization of the team, a compelling future direction is direct integration with IoT sensor data streams via MQTT or WebSocket protocols, enabling real-time monitoring dashboards for industrial sensors, environmental monitoring stations, and smart campus IoT deployments — directly leveraging the core competencies of the B.Tech. CSE (IoT) program.</p>
     <h3>19.8 Anomaly Detection</h3>
-    <p>Implementing statistical anomaly detection (Z-score, IQR-based outlier detection) would automatically flag unusual data points and visualize them on charts, adding another layer of automated insight generation without user intervention.</p>
+    <p>Implementing statistical anomaly detection (Z-score or IQR-based outlier detection) would automatically flag unusual data points and visualize them on charts, adding another layer of automated insight generation without user intervention.</p>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 26</span></footer>
 </div>
@@ -956,15 +945,15 @@
   <div class="section">
     <h2>Chapter 20: Conclusion</h2>
     <p>The <strong>AI-Powered Data Analysis Dashboard</strong> project successfully demonstrates that a single-developer-week effort using modern web technologies can produce analytical capabilities that traditionally required expensive enterprise software installations. The project stands as a meaningful contribution to the democratization of data analytics, particularly relevant for the Indian context where SMEs and educational institutions frequently lack the budget for enterprise BI tools.</p>
-    <p style="margin-top:8px">The technical achievements of this project are significant: the successful implementation of <strong>linear regression forecasting</strong> and <strong>Pearson correlation analysis</strong> natively in JavaScript — without any external ML library — demonstrates that sophisticated statistical algorithms can be made accessible in lightweight browser environments. The accuracy of these implementations, verified against established scientific computing tools, validates the correctness of the approach.</p>
-    <p style="margin-top:8px">The integration of the <strong>Groq LLaMA 3.3 70B API</strong> into the analytics workflow represents a forward-looking design decision. Natural language interfaces for data querying represent the future of business intelligence, and this project successfully implements that paradigm in a practical, usable form. The AI Chat and Report Generator modules received particularly positive responses during testing.</p>
-    <p style="margin-top:8px">From an academic perspective, this project provided the team with hands-on experience across a wide spectrum: <strong>frontend engineering</strong>, <strong>data engineering</strong>, <strong>applied mathematics</strong>, <strong>API integration</strong>, and <strong>UI/UX design</strong>. This breadth of learning aligns well with the interdisciplinary nature of the CSE (IoT) curriculum at GEC Vaishali.</p>
-    <p style="margin-top:8px">In conclusion, the project meets all stated objectives, performs reliably across diverse test datasets, and provides a meaningful, production-usable tool. We are grateful for the guidance of <strong>Prof. Manoj Kumar</strong> and the coordination of <strong>Prof. Uttam Kumar</strong> throughout this journey, and for the supportive academic environment provided by <strong>Government Engineering College, Vaishali</strong>.</p>
-    <div class="sig-row" style="margin-top:30px">
-      <div class="sig-block"><div class="sig-line">Amarjeet Kumar<br/><span style="font-size:8pt;color:#555">22155135005</span></div></div>
-      <div class="sig-block"><div class="sig-line">Shanu Kumar<br/><span style="font-size:8pt;color:#555">22155135026</span></div></div>
-      <div class="sig-block"><div class="sig-line">Kartik Raj<br/><span style="font-size:8pt;color:#555">22155135023</span></div></div>
-      <div class="sig-block"><div class="sig-line">Krishna Murari<br/><span style="font-size:8pt;color:#555">22155125051</span></div></div>
+    <p style="margin-top:6px">The technical achievements of this project are significant: the successful implementation of <strong>linear regression forecasting</strong> and <strong>Pearson correlation analysis</strong> natively in JavaScript — without any external ML library — demonstrates that sophisticated statistical algorithms can be made accessible in lightweight browser environments. The accuracy of these implementations, verified against established scientific computing tools, validates the correctness of the approach.</p>
+    <p style="margin-top:6px">The integration of the <strong>Groq LLaMA 3.3 70B API</strong> into the analytics workflow represents a forward-looking design decision. Natural language interfaces for data querying represent the future of business intelligence, and this project successfully implements that paradigm in a practical, usable form. The AI Chat and Report Generator modules received particularly positive responses during testing.</p>
+    <p style="margin-top:6px">From an academic perspective, this project provided the team with hands-on experience across a wide spectrum: <strong>frontend engineering</strong>, <strong>data engineering</strong>, <strong>applied mathematics</strong>, <strong>API integration</strong>, and <strong>UI/UX design</strong>. This breadth of learning aligns well with the interdisciplinary nature of the CSE (IoT) curriculum at GEC Vaishali.</p>
+    <p style="margin-top:6px">In conclusion, the project meets all stated objectives, performs reliably across diverse test datasets, and provides a meaningful, production-usable tool. We are grateful for the guidance of <strong>Prof. Manoj Kumar</strong> and the coordination of <strong>Prof. Uttam Kumar</strong>, and for the supportive academic environment provided by <strong>Government Engineering College, Vaishali</strong>.</p>
+    <div class="sig-row" style="margin-top:24px">
+      <div class="sig-block"><div class="sig-line">Amarjeet Kumar<br/><span style="font-size:7.5pt;color:#555">22155135005</span></div></div>
+      <div class="sig-block"><div class="sig-line">Shanu Kumar<br/><span style="font-size:7.5pt;color:#555">22155135026</span></div></div>
+      <div class="sig-block"><div class="sig-line">Kartik Raj<br/><span style="font-size:7.5pt;color:#555">22155135023</span></div></div>
+      <div class="sig-block"><div class="sig-line">Krishna Murari<br/><span style="font-size:7.5pt;color:#555">22155125051</span></div></div>
     </div>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 27</span></footer>
@@ -1018,40 +1007,42 @@
   <div class="section">
     <h2>Appendix A – Key Code Snippets</h2>
     <h3>A.1 Linear Regression Implementation</h3>
-    <div style="background:#f0f4ff;border:1px solid #c0c8d8;border-radius:4px;padding:8px 12px;font-family:monospace;font-size:9.5pt;line-height:1.65;margin-bottom:12px">
-      <p>const linearRegression = (values) => {</p>
-      <p>&nbsp;&nbsp;const n = values.length;</p>
-      <p>&nbsp;&nbsp;if (n &lt; 2) return { slope:0, intercept:0, predict:(x)=>values[0]||0 };</p>
-      <p>&nbsp;&nbsp;const sumX = values.reduce((s,_,i)=>s+i, 0);</p>
-      <p>&nbsp;&nbsp;const sumY = values.reduce((s,v)=>s+v, 0);</p>
-      <p>&nbsp;&nbsp;const sumXY = values.reduce((s,v,i)=>s+i*v, 0);</p>
-      <p>&nbsp;&nbsp;const sumX2 = values.reduce((s,_,i)=>s+i*i, 0);</p>
-      <p>&nbsp;&nbsp;const slope = (n*sumXY-sumX*sumY)/(n*sumX2-sumX*sumX);</p>
-      <p>&nbsp;&nbsp;const intercept = (sumY-slope*sumX)/n;</p>
-      <p>&nbsp;&nbsp;return { slope, intercept, predict:(x)=>slope*x+intercept };</p>
-      <p>};</p>
+    <div class="code-block">
+      const linearRegression = (values) => {<br/>
+      &nbsp;&nbsp;const n = values.length;<br/>
+      &nbsp;&nbsp;if (n &lt; 2) return { slope:0, intercept:0, predict:(x)=>values[0]||0 };<br/>
+      &nbsp;&nbsp;const sumX = values.reduce((s,_,i)=>s+i, 0);<br/>
+      &nbsp;&nbsp;const sumY = values.reduce((s,v)=>s+v, 0);<br/>
+      &nbsp;&nbsp;const sumXY = values.reduce((s,v,i)=>s+i*v, 0);<br/>
+      &nbsp;&nbsp;const sumX2 = values.reduce((s,_,i)=>s+i*i, 0);<br/>
+      &nbsp;&nbsp;const slope = (n*sumXY-sumX*sumY)/(n*sumX2-sumX*sumX);<br/>
+      &nbsp;&nbsp;const intercept = (sumY-slope*sumX)/n;<br/>
+      &nbsp;&nbsp;return { slope, intercept, predict:(x)=>slope*x+intercept };<br/>
+      };
     </div>
     <h3>A.2 Pearson Correlation</h3>
-    <div style="background:#f0f4ff;border:1px solid #c0c8d8;border-radius:4px;padding:8px 12px;font-family:monospace;font-size:9.5pt;line-height:1.65;margin-bottom:12px">
-      <p>const pearsonCorr = (a, b) => {</p>
-      <p>&nbsp;&nbsp;const n = a.length;</p>
-      <p>&nbsp;&nbsp;const ma = _.mean(a), mb = _.mean(b);</p>
-      <p>&nbsp;&nbsp;const num = _.sum(a.map((v,i)=>(v-ma)*(b[i]-mb)));</p>
-      <p>&nbsp;&nbsp;const den = Math.sqrt(</p>
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;_.sum(a.map(v=>(v-ma)**2)) * _.sum(b.map(v=>(v-mb)**2)));</p>
-      <p>&nbsp;&nbsp;return den===0 ? 0 : num/den;</p>
-      <p>};</p>
+    <div class="code-block">
+      const pearsonCorr = (a, b) => {<br/>
+      &nbsp;&nbsp;const n = a.length;<br/>
+      &nbsp;&nbsp;const ma = _.mean(a), mb = _.mean(b);<br/>
+      &nbsp;&nbsp;const num = _.sum(a.map((v,i)=>(v-ma)*(b[i]-mb)));<br/>
+      &nbsp;&nbsp;const den = Math.sqrt(<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;_.sum(a.map(v=>(v-ma)**2)) * _.sum(b.map(v=>(v-mb)**2)));<br/>
+      &nbsp;&nbsp;return den===0 ? 0 : num/den;<br/>
+      };
     </div>
     <h3>A.3 KPI Auto-Detection (Excerpt)</h3>
-    <div style="background:#f0f4ff;border:1px solid #c0c8d8;border-radius:4px;padding:8px 12px;font-family:monospace;font-size:9.5pt;line-height:1.65">
-      <p>const sc = headers.find(c=></p>
-      <p>&nbsp;&nbsp;['sales','revenue','amount'].some(k=>c.toLowerCase().includes(k)));</p>
-      <p>if (sc) {</p>
-      <p>&nbsp;&nbsp;const v = data.map(r=>r[sc]).filter(n=>typeof n==='number');</p>
-      <p>&nbsp;&nbsp;kpis.push({ title:'Total Sales',</p>
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;value:'₹'+_.sum(v).toLocaleString('en-IN',{maximumFractionDigits:0}),</p>
-      <p>&nbsp;&nbsp;&nbsp;&nbsp;color:'from-green-500 to-green-600' });</p>
-      <p>}</p>
+    <div class="code-block">
+      const sc = headers.find(c=><br/>
+      &nbsp;&nbsp;['sales','revenue','amount'].some(k=>c.toLowerCase().includes(k)));<br/>
+      if (sc) {<br/>
+      &nbsp;&nbsp;const v = data.map(r=>r[sc]).filter(n=>typeof n==='number');<br/>
+      &nbsp;&nbsp;kpis.push({<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;title: 'Total Sales',<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;value: '₹' + _.sum(v).toLocaleString('en-IN',{maximumFractionDigits:0}),<br/>
+      &nbsp;&nbsp;&nbsp;&nbsp;color: 'from-green-500 to-green-600'<br/>
+      &nbsp;&nbsp;});<br/>
+      }
     </div>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 29</span></footer>
@@ -1065,7 +1056,7 @@
   </div>
   <div class="section">
     <h2>Appendix B – Glossary of Terms</h2>
-    <table style="font-size:9.5pt">
+    <table style="font-size:9pt">
       <thead><tr><th>Term</th><th>Definition</th></tr></thead>
       <tbody>
         <tr><td><strong>API</strong></td><td>Application Programming Interface — a set of protocols for communication between software components</td></tr>
@@ -1084,13 +1075,13 @@
         <tr><td><strong>XLSX</strong></td><td>Office Open XML Spreadsheet — Microsoft Excel file format</td></tr>
       </tbody>
     </table>
-    <div style="margin-top:14px;border:1.5px solid #1a3a6b;border-radius:5px;padding:12px;text-align:center;background:#f7f9ff">
+    <div style="margin-top:10px;border:1.5px solid #1a3a6b;border-radius:5px;padding:10px;text-align:center;background:#f7f9ff">
       <p style="font-size:11pt;color:#1a3a6b;font-weight:700">Government Engineering College, Vaishali</p>
-      <p style="font-size:9.5pt;color:#555;margin-top:3px">Department of Computer Science &amp; Engineering (IoT)</p>
-      <p style="font-size:9.5pt;color:#555">B.Tech. Final Year Project Report | Academic Year 2025–2026</p>
-      <hr style="border:none;border-top:1px solid #c0c8d8;margin:8px 0"/>
-      <p style="font-size:9.5pt;color:#333"><strong>Project Guide:</strong> Prof. Manoj Kumar &nbsp;|&nbsp; <strong>Coordinator:</strong> Prof. Uttam Kumar</p>
-      <p style="font-size:9.5pt;color:#333;margin-top:3px"><strong>Team:</strong> Amarjeet Kumar (22155135005) &nbsp;·&nbsp; Shanu Kumar (22155135026) &nbsp;·&nbsp; Kartik Raj (22155135023) &nbsp;·&nbsp; Krishna Murari (22155125051)</p>
+      <p style="font-size:9pt;color:#555;margin-top:2px">Department of Computer Science &amp; Engineering (IoT)</p>
+      <p style="font-size:9pt;color:#555">B.Tech. Final Year Project Report | Academic Year 2025–2026</p>
+      <hr style="border:none;border-top:1px solid #c0c8d8;margin:6px 0"/>
+      <p style="font-size:9pt;color:#333"><strong>Project Guide:</strong> Prof. Manoj Kumar &nbsp;|&nbsp; <strong>Coordinator:</strong> Prof. Uttam Kumar</p>
+      <p style="font-size:9pt;color:#333;margin-top:2px"><strong>Team:</strong> Amarjeet Kumar (22155135005) &nbsp;·&nbsp; Shanu Kumar (22155135026) &nbsp;·&nbsp; Kartik Raj (22155135023) &nbsp;·&nbsp; Krishna Murari (22155125051)</p>
     </div>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 30</span></footer>
