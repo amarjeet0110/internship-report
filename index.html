@@ -60,6 +60,12 @@
     footer.pf{position:absolute;bottom:7mm;left:20mm;right:16mm;}
   }
   @page{size:A4;margin:0}
+  .fig-box{border:1.5px solid #1a3a6b;border-radius:6px;overflow:hidden;margin:6px 0;text-align:center;background:#f0f4ff;}
+  .fig-box img{width:100%;max-height:210px;object-fit:contain;display:block;}
+  .fig-caption{font-size:8pt;color:#444;font-style:italic;padding:3px 6px;background:#e8eeff;border-top:1px solid #c0c8d8;}
+  .fig-row{display:flex;gap:8px;margin:6px 0;}
+  .fig-row .fig-box{flex:1;}
+  .fig-row .fig-box img{max-height:170px;}
 </style>
 </head>
 <body>
@@ -511,6 +517,10 @@
       <li><strong>CSV (.csv):</strong> Parsed using PapaParse with options: <code>header: true</code>, <code>dynamicTyping: true</code>, <code>skipEmptyLines: true</code>.</li>
       <li><strong>Excel (.xlsx, .xls):</strong> Processed using SheetJS. The file is read as an ArrayBuffer, the first sheet is extracted, and converted to JSON via <code>XLSX.utils.sheet_to_json()</code>.</li>
     </ul>
+    <div class="fig-row">
+      <div class="fig-box screenshot-slot" data-fig="fig-upload"></div>
+      <div class="fig-box screenshot-slot" data-fig="fig-loading"></div>
+    </div>
     <h3>7.3 Post-Parse Pipeline</h3>
     <p>Once parsed, the data array and headers array are extracted and stored in React state. The application immediately triggers a pipeline of analytical functions: <code>genInsights()</code> for textual dataset insights, <code>calcStats()</code> for mean/sum/max/min computation, <code>analyzeQuality()</code> for duplicate and missing value detection, <code>genAlerts()</code> for threshold-based business alerts, and <code>genAIInsights()</code> for top performer and profit margin calculations.</p>
     <h3>7.4 Loading Animation</h3>
@@ -531,6 +541,7 @@
     <h2>Chapter 8: Module – KPI Dashboard &amp; Data Quality</h2>
     <h3>8.1 KPI Auto-Detection</h3>
     <p>The KPI module uses keyword-based column name matching to automatically detect and compute relevant business metrics. Column names are checked (case-insensitively) against keyword lists for sales/revenue columns, profit columns, and product columns. KPI values are formatted in Indian numbering convention with ₹ symbol.</p>
+    <div class="fig-box screenshot-slot" data-fig="fig-overview"></div>
     <h3>8.2 AI Business Insights</h3>
     <p>The <code>genAIInsights()</code> function produces two critical business insights purely from client-side computation: <strong>Top Performer Detection</strong> (groups data by product/category, sums sales, identifies the highest-performing entity) and <strong>Profit Margin Analysis</strong> (calculates overall profit margin and classifies it as healthy &gt;15% or needing optimization).</p>
     <h3>8.3 Alerts System</h3>
@@ -553,6 +564,7 @@
     <h2>Chapter 9: Module – Data Visualization</h2>
     <h3>9.1 Chart Selection Logic</h3>
     <p>The visualization module of the Data Analysis Dashboard uses intelligent column detection to automatically determine which charts are relevant for the uploaded dataset. Charts are only rendered if the required data columns are detected.</p>
+    <div class="fig-box screenshot-slot" data-fig="fig-charts"></div>
     <h3>9.2 Area Chart – Sales Trend</h3>
     <p>The Area Chart visualizes sales over time by detecting date/month/year columns and grouping data by the detected time dimension. A linear gradient fill provides visual depth. The chart supports up to 30 time periods and is rendered using Recharts' <code>AreaChart</code> component with a custom gradient definition in SVG defs.</p>
     <h3>9.3 Horizontal Bar Chart – Product Performance</h3>
@@ -581,6 +593,7 @@
       <p><strong>slope (m)</strong> = (n·Σxy − Σx·Σy) / (n·Σx² − (Σx)²)</p>
       <p><strong>intercept (b)</strong> = (Σy − m·Σx) / n &nbsp;&nbsp;|&nbsp;&nbsp; <strong>predict(x)</strong> = m·x + b</p>
     </div>
+    <div class="fig-box screenshot-slot" data-fig="fig-forecast"></div>
     <h3>10.2 Implementation Details</h3>
     <p>The function <code>linearRegression(values)</code> takes an array of numeric values as input, treating the array index as the time variable x. It returns an object containing the slope, intercept, and a <code>predict(x)</code> closure function. A minimum of 2 data points is required.</p>
     <h3>10.3 Forecast Generation</h3>
@@ -608,6 +621,7 @@
     <div class="info-box">
       <p><strong>r(A,B)</strong> = Σ[(Aᵢ − Ā)(Bᵢ − B̄)] / √[Σ(Aᵢ − Ā)² · Σ(Bᵢ − B̄)²]</p>
     </div>
+    <div class="fig-box screenshot-slot" data-fig="fig-heatmap"></div>
     <h3>11.2 Matrix Computation</h3>
     <p>The <code>getCorrMatrix()</code> function extracts up to 6 numeric columns from the dataset. For each pair of columns (A, B), it filters both to only include rows where both values are numeric, then computes the Pearson r value rounded to 2 decimal places. The result is an n×n symmetric matrix where the diagonal always equals 1.0.</p>
     <h3>11.3 Color Encoding</h3>
@@ -630,6 +644,7 @@
     <h2>Chapter 12: Module – AI Chat Assistant</h2>
     <h3>12.1 Overview</h3>
     <p>The AI Chat module of the Data Analysis Dashboard provides a conversational interface that allows users to ask natural language questions about their uploaded dataset. It is powered by the <strong>Groq API</strong> running the <strong>LLaMA 3.3 70B Versatile</strong> model.</p>
+    <div class="fig-box screenshot-slot" data-fig="fig-chat"></div>
     <h3>12.2 Context Injection</h3>
     <p>Each API call includes a system prompt that injects dataset metadata as context: the column headers (all columns), the first 50 rows of data as a JSON string, and the total row count. This "context window" approach enables the LLM to answer data-specific questions accurately without the full dataset needing to be transmitted.</p>
     <h3>12.3 Conversation History</h3>
@@ -654,6 +669,7 @@
     <h2>Chapter 13: Module – AI Report Generator</h2>
     <h3>13.1 Overview</h3>
     <p>The AI Report Generator of the Data Analysis Dashboard enables users to produce a complete, structured business analysis report with a single button click. The report is generated by the Groq LLaMA 3.3 70B model and formatted in professional markdown-style sections.</p>
+    <div class="fig-box screenshot-slot" data-fig="fig-report"></div>
     <h3>13.2 Report Structure</h3>
     <ul>
       <li><strong>Executive Summary:</strong> A concise 3–4 sentence overview of the dataset and key findings</li>
@@ -683,6 +699,7 @@
     <h2>Chapter 14: Implementation Details</h2>
     <h3>14.1 Development Approach</h3>
     <p>The Data Analysis Dashboard was developed iteratively over approximately 8 weeks following an Agile-inspired approach with weekly review cycles. Each team member was assigned ownership of specific modules while the team lead (Amarjeet Kumar) maintained overall integration and architecture consistency.</p>
+    <div class="fig-box screenshot-slot" data-fig="fig-data"></div>
     <h3>14.2 Module-wise Feature Summary</h3>
     <table style="font-size:8.5pt">
       <thead><tr><th>Module</th><th>Key Functions</th><th>~LOC</th><th>Developer</th></tr></thead>
@@ -1012,6 +1029,7 @@
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 30</span></footer>
 </div>
+
 
 </body>
 </html>
