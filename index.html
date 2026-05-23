@@ -7,6 +7,12 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Times+New+Roman:ital,wght@0,400;0,700;1,400&display=swap');
   *{box-sizing:border-box;margin:0;padding:0}
+  .img-upload-area{border:2px dashed #1a3a6b;border-radius:6px;padding:10px;text-align:center;margin:8px 0;background:#f7f9ff;cursor:pointer;position:relative}
+  .img-upload-area input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+  .img-upload-area .placeholder{font-size:8.5pt;color:#1a3a6b;pointer-events:none}
+  .img-upload-area img.preview{max-width:100%;max-height:280px;border-radius:4px;border:1px solid #c0c8d8;display:block;margin:0 auto}
+  .img-caption{font-size:8pt;color:#555;text-align:center;margin-top:3px;font-style:italic}
+  @media print{.img-upload-area{border:none;padding:0;background:transparent}.img-upload-area input{display:none}.placeholder{display:none}}
   body{font-family:'Times New Roman',Times,serif;background:#e8e8e8;color:#111;font-size:11pt;line-height:1.6}
   .page{width:210mm;margin:0 auto 24px;background:#fff;padding:10mm 16mm 22mm 20mm;box-shadow:0 4px 24px rgba(0,0,0,.2);position:relative;min-height:297mm;overflow:hidden;}
   .page::before{content:'';position:absolute;top:5mm;left:6mm;right:5mm;bottom:5mm;border:2px solid #1a3a6b;pointer-events:none;z-index:0;}
@@ -515,12 +521,18 @@
     <p>Once parsed, the data array and headers array are extracted and stored in React state. The application immediately triggers a pipeline of analytical functions: <code>genInsights()</code> for textual dataset insights, <code>calcStats()</code> for mean/sum/max/min computation, <code>analyzeQuality()</code> for duplicate and missing value detection, <code>genAlerts()</code> for threshold-based business alerts, and <code>genAIInsights()</code> for top performer and profit margin calculations.</p>
     <h3>7.4 Loading Animation</h3>
     <p>During the processing phase, a custom multi-panel animated loading screen is displayed featuring an animated bar chart, smooth wave line chart, spinning pie chart, and bouncing processing dots. All animations are implemented using CSS keyframes with staggered delays for a polished user experience.</p>
-    <div style="text-align:center;margin:8px 0">
-      <img src="assets/screenshots/img1_upload.png" alt="File Upload Interface" style="max-width:100%;border:1px solid #c0c8d8;border-radius:4px"/>
-      <p style="font-size:8pt;color:#555;margin-top:3px"><em>Fig 2.1 – Drag-and-Drop File Upload Interface</em></p>
-      <img src="assets/screenshots/img2_loading.png" alt="Loading Animation Screen" style="max-width:100%;border:1px solid #c0c8d8;border-radius:4px;margin-top:8px"/>
-      <p style="font-size:8pt;color:#555;margin-top:3px"><em>Fig 2.2 – Multi-Panel Loading Animation Screen</em></p>
+    <div class="img-upload-area">
+      <input type="file" accept="image/*" onchange="loadImg(this,'p1')"/>
+      <div class="placeholder">📁 Click here to upload — <strong>Fig 2.1: File Upload Interface</strong></div>
+      <img id="p1" style="display:none"/>
     </div>
+    <p class="img-caption">Fig 2.1 – Drag-and-Drop File Upload Interface</p>
+    <div class="img-upload-area" style="margin-top:6px">
+      <input type="file" accept="image/*" onchange="loadImg(this,'p2')"/>
+      <div class="placeholder">📁 Click here to upload — <strong>Fig 2.2: Loading Animation Screen</strong></div>
+      <img id="p2" style="display:none"/>
+    </div>
+    <p class="img-caption">Fig 2.2 – Multi-Panel Loading Animation Screen</p>
     <h3>7.5 Error Handling</h3>
     <p>The module includes try-catch error handling for both file reading and parsing operations. Unsupported file formats trigger an alert dialog, and parsing failures are caught and reported without crashing the application. Users can upload a new file at any time using the header "Upload File" button, which resets all state.</p>
   </div>
@@ -545,10 +557,12 @@
     <p>A three-metric data quality panel displays total row count, number of duplicate records, and count of columns with missing values. Color coding (green/orange) provides immediate visual feedback on data health, helping users identify data cleanliness issues before making analytical decisions.</p>
     <h3>8.5 Top/Bottom Performer Analysis</h3>
     <p>The dashboard automatically identifies the Top 5 and Bottom 5 performing products/categories by total sales, displayed in ranked lists with color-coded rank badges. This provides instant business intelligence about which products drive revenue and which may need attention or discontinuation.</p>
-    <div style="text-align:center;margin:8px 0">
-      <img src="assets/screenshots/img3_overview.png" alt="KPI Overview Dashboard" style="max-width:100%;border:1px solid #c0c8d8;border-radius:4px"/>
-      <p style="font-size:8pt;color:#555;margin-top:3px"><em>Fig 3.1 – KPI Dashboard, AI Insights, Data Quality Report &amp; Top/Bottom Performers</em></p>
+    <div class="img-upload-area">
+      <input type="file" accept="image/*" onchange="loadImg(this,'p3')"/>
+      <div class="placeholder">📁 Click here to upload — <strong>Fig 3.1: KPI Overview Dashboard</strong></div>
+      <img id="p3" style="display:none"/>
     </div>
+    <p class="img-caption">Fig 3.1 – KPI Dashboard, AI Insights, Data Quality Report &amp; Top/Bottom Performers</p>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 15</span></footer>
 </div>
@@ -573,10 +587,12 @@
     <p>When both sales and profit columns are detected, a grouped bar chart renders both metrics side-by-side for each product/category (up to 12 shown). This enables immediate comparison of revenue versus profitability, helping identify high-revenue but low-margin products.</p>
     <h3>9.6 Responsive Design</h3>
     <p>All charts use Recharts' <code>ResponsiveContainer</code> with <code>width="100%"</code>, ensuring they automatically resize to the available viewport width on both desktop and mobile devices.</p>
-    <div style="text-align:center;margin:8px 0">
-      <img src="assets/screenshots/img4_charts.png" alt="Charts Module" style="max-width:100%;border:1px solid #c0c8d8;border-radius:4px"/>
-      <p style="font-size:8pt;color:#555;margin-top:3px"><em>Fig 4.1–4.4 – Sales Trend, Product Performance, Category Distribution &amp; Profit vs Sales Charts</em></p>
+    <div class="img-upload-area">
+      <input type="file" accept="image/*" onchange="loadImg(this,'p4')"/>
+      <div class="placeholder">📁 Click here to upload — <strong>Fig 4.1–4.4: Charts Module</strong></div>
+      <img id="p4" style="display:none"/>
     </div>
+    <p class="img-caption">Fig 4.1–4.4 – Sales Trend, Product Performance, Category Distribution &amp; Profit vs Sales Charts</p>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 16</span></footer>
 </div>
@@ -605,10 +621,12 @@
     <p>Below the chart, a summary table displays the predicted value for each of the 5 future periods in individual cards, formatted to 2 decimal places and highlighted in amber color to distinguish them from historical actuals.</p>
     <h3>10.6 Limitations</h3>
     <p>The linear regression model assumes a linear trend, which may not capture cyclical or seasonal patterns. Future work could incorporate ARIMA or Holt-Winters seasonal decomposition for more sophisticated forecasting on seasonal business datasets.</p>
-    <div style="text-align:center;margin:8px 0">
-      <img src="assets/screenshots/img5_forecast.png" alt="Forecasting Module" style="max-width:100%;border:1px solid #c0c8d8;border-radius:4px"/>
-      <p style="font-size:8pt;color:#555;margin-top:3px"><em>Fig 5.1 – Linear Regression Forecasting Chart with F+1 to F+5 Predictions</em></p>
+    <div class="img-upload-area">
+      <input type="file" accept="image/*" onchange="loadImg(this,'p5')"/>
+      <div class="placeholder">📁 Click here to upload — <strong>Fig 5.1: Forecasting Chart</strong></div>
+      <img id="p5" style="display:none"/>
     </div>
+    <p class="img-caption">Fig 5.1 – Linear Regression Forecasting Chart with F+1 to F+5 Predictions</p>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 17</span></footer>
 </div>
@@ -634,10 +652,12 @@
     <p>For business datasets, strong positive correlations between Sales and Profit suggest healthy margins. A negative correlation between Discount and Profit indicates that discounting strategies are eroding profitability. The heatmap makes these relationships immediately apparent without statistical background from the user.</p>
     <h3>11.5 Performance Consideration</h3>
     <p>To maintain browser responsiveness, the heatmap is limited to a maximum of 6 numeric columns, and computation uses <code>Array.slice()</code> to cap at the minimum available length, keeping complexity at O(6² × n). All correlation values are computed once on file load and cached in React state.</p>
-    <div style="text-align:center;margin:8px 0">
-      <img src="assets/screenshots/img6_heatmap.png" alt="Correlation Heatmap" style="max-width:100%;border:1px solid #c0c8d8;border-radius:4px"/>
-      <p style="font-size:8pt;color:#555;margin-top:3px"><em>Fig 6.1 – Pearson Correlation Heatmap showing column relationships</em></p>
+    <div class="img-upload-area">
+      <input type="file" accept="image/*" onchange="loadImg(this,'p6')"/>
+      <div class="placeholder">📁 Click here to upload — <strong>Fig 6.1: Correlation Heatmap</strong></div>
+      <img id="p6" style="display:none"/>
     </div>
+    <p class="img-caption">Fig 6.1 – Pearson Correlation Heatmap showing column relationships</p>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 18</span></footer>
 </div>
@@ -662,10 +682,12 @@
     <p>The chat interface follows a standard messaging app layout: user messages appear on the right in purple-pink gradient bubbles, AI responses appear on the left in dark glass-effect cards. A typing indicator (three animated bouncing dots) displays while the API call is in progress.</p>
     <h3>12.6 Error Handling</h3>
     <p>API errors are caught and displayed as inline error messages within the chat, including the specific error message from the Groq API. This prevents the interface from becoming unresponsive on network failures or quota exhaustion.</p>
-    <div style="text-align:center;margin:8px 0">
-      <img src="assets/screenshots/img7_chat.png" alt="AI Chat Interface" style="max-width:100%;border:1px solid #c0c8d8;border-radius:4px"/>
-      <p style="font-size:8pt;color:#555;margin-top:3px"><em>Fig 7.1 – AI Chat Assistant Interface with natural language query response</em></p>
+    <div class="img-upload-area">
+      <input type="file" accept="image/*" onchange="loadImg(this,'p7')"/>
+      <div class="placeholder">📁 Click here to upload — <strong>Fig 7.1: AI Chat Interface</strong></div>
+      <img id="p7" style="display:none"/>
     </div>
+    <p class="img-caption">Fig 7.1 – AI Chat Assistant Interface with natural language query response</p>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 19</span></footer>
 </div>
@@ -695,14 +717,18 @@
     <p>The generated report can be downloaded as a plain text file (<code>analysis_report.txt</code>) using the browser's Blob API. This allows users to save, share, or include the report in presentations without manual copy-paste.</p>
     <h3>13.5 Loading State</h3>
     <p>During report generation (typically 3–8 seconds), a spinner animation replaces the Generate button. The report renders in a scrollable panel with monospace font preserving the markdown section structure. The download button appears only after successful report generation.</p>
-    <div style="text-align:center;margin:8px 0">
-      <img src="assets/screenshots/img8_report.png" alt="AI Report Generator" style="max-width:100%;border:1px solid #c0c8d8;border-radius:4px"/>
-      <p style="font-size:8pt;color:#555;margin-top:3px"><em>Fig 8.1 – AI Report Generator output with Executive Summary &amp; Key Findings</em></p>
+    <div class="img-upload-area">
+      <input type="file" accept="image/*" onchange="loadImg(this,'p8')"/>
+      <div class="placeholder">📁 Click here to upload — <strong>Fig 8.1: AI Report Generator</strong></div>
+      <img id="p8" style="display:none"/>
     </div>
-    <div style="text-align:center;margin:8px 0">
-      <img src="assets/screenshots/img9_data.png" alt="Data Preview Table" style="max-width:100%;border:1px solid #c0c8d8;border-radius:4px"/>
-      <p style="font-size:8pt;color:#555;margin-top:3px"><em>Fig 9.1 – Filterable Data Preview Table with column search</em></p>
+    <p class="img-caption">Fig 8.1 – AI Report Generator output with Executive Summary &amp; Key Findings</p>
+    <div class="img-upload-area" style="margin-top:6px">
+      <input type="file" accept="image/*" onchange="loadImg(this,'p9')"/>
+      <div class="placeholder">📁 Click here to upload — <strong>Fig 9.1: Data Preview Table</strong></div>
+      <img id="p9" style="display:none"/>
     </div>
+    <p class="img-caption">Fig 9.1 – Filterable Data Preview Table with column search</p>
   </div>
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 20</span></footer>
 </div>
@@ -1047,5 +1073,19 @@
   <footer class="pf"><span>GEC Vaishali – B.Tech. Final Year Project Report 2025–26</span><span>Page 30</span></footer>
 </div>
 
+<script>
+function loadImg(input, previewId) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const el = document.getElementById(previewId);
+    el.src = e.target.result;
+    el.style.display = 'block';
+    input.parentElement.querySelector('.placeholder').style.display = 'none';
+  };
+  reader.readAsDataURL(file);
+}
+</script>
 </body>
 </html>
