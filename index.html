@@ -3,459 +3,412 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Data Analysis Dashboard – PPT</title>
+<title>PPT Generator</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/PptxGenJS/3.12.0/pptxgen.bundled.js"></script>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Arial,sans-serif;background:#111;display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:0}
-.controls{position:sticky;top:0;z-index:100;background:#1a1a2e;width:100%;display:flex;align-items:center;justify-content:center;gap:12px;padding:10px 16px;border-bottom:1px solid #333}
-.ctrl-btn{background:#2d2d50;color:#fff;border:1px solid #444;padding:7px 18px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;transition:background .2s}
-.ctrl-btn:hover{background:#4a4a8a}
-.ctrl-btn:disabled{opacity:.4;cursor:not-allowed}
-.slide-info{color:#aaa;font-size:13px;min-width:90px;text-align:center}
-.print-btn{background:#1a3a6b;color:#fff;border:none;padding:7px 18px;border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;margin-left:8px}
-.print-btn:hover{background:#2558a8}
-
-/* SLIDE CONTAINER */
-.slides-wrap{width:100%;max-width:960px;padding:24px 12px 40px}
-.slide{width:100%;aspect-ratio:16/9;background:#fff;border-radius:10px;overflow:hidden;display:none;box-shadow:0 8px 32px rgba(0,0,0,.5);position:relative}
-.slide.active{display:flex;flex-direction:column}
-
-/* SLIDE 1 – COVER */
-.s1{background:linear-gradient(135deg,#0d1b4b 0%,#1a3a6b 50%,#0d1b4b 100%)!important}
-.s1 .cover-top{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 40px 16px;text-align:center}
-.s1 .inst{color:#90b4e8;font-size:13px;letter-spacing:.5px;margin-bottom:4px}
-.s1 .main-title{color:#fff;font-size:36px;font-weight:800;line-height:1.1;margin-bottom:6px}
-.s1 .sub-title{color:#a8c8f0;font-size:14px;font-style:italic;margin-bottom:20px;max-width:560px;line-height:1.4}
-.s1 .badge-row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:12px}
-.badge{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#d0e4ff;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:600}
-.s1 .team-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-.team-chip{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#c8daef;padding:4px 12px;border-radius:4px;font-size:11px}
-.s1 .bottom-bar{background:rgba(255,255,255,.07);border-top:1px solid rgba(255,255,255,.15);padding:10px 40px;display:flex;justify-content:space-between;align-items:center}
-.s1 .bottom-bar span{color:#8aa8cc;font-size:11px}
-
-/* COMMON SLIDE STYLES */
-.slide-header{background:#1a3a6b;padding:14px 32px 10px;display:flex;align-items:center;gap:10px}
-.slide-header .ch-num{background:rgba(255,255,255,.15);color:#fff;font-size:11px;font-weight:700;padding:3px 9px;border-radius:12px;white-space:nowrap}
-.slide-header h2{color:#fff;font-size:20px;font-weight:700;flex:1}
-.slide-body{flex:1;padding:20px 32px;display:flex;flex-direction:column;gap:10px}
-.slide-footer{background:#f0f4ff;border-top:2px solid #1a3a6b;padding:6px 32px;display:flex;justify-content:space-between;font-size:10px;color:#555}
-
-/* CARDS */
-.card-row{display:flex;gap:10px;flex-wrap:wrap}
-.card{flex:1;min-width:140px;background:#f7f9ff;border:1.5px solid #d0d8f0;border-radius:7px;padding:10px 14px}
-.card h4{font-size:12px;font-weight:700;color:#1a3a6b;margin-bottom:4px;text-transform:uppercase;letter-spacing:.4px}
-.card p{font-size:11.5px;color:#444;line-height:1.5}
-.card .icon{font-size:22px;margin-bottom:4px}
-
-/* KPI cards */
-.kpi-row{display:flex;gap:8px}
-.kpi{flex:1;background:#f7f9ff;border:1.5px solid #d0d8f0;border-radius:7px;padding:10px 12px;text-align:center}
-.kpi .kv{font-size:22px;font-weight:800;color:#1a3a6b}
-.kpi .kl{font-size:10px;color:#666;margin-top:2px;text-transform:uppercase;letter-spacing:.3px}
-
-/* TIMELINE */
-.timeline{display:flex;flex-direction:column;gap:6px}
-.tl-item{display:flex;gap:10px;align-items:flex-start}
-.tl-dot{width:26px;height:26px;border-radius:50%;background:#1a3a6b;color:#fff;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.tl-text h4{font-size:12.5px;font-weight:700;color:#1a3a6b;margin-bottom:1px}
-.tl-text p{font-size:11px;color:#555;line-height:1.4}
-
-/* TABLE */
-table.nice{width:100%;border-collapse:collapse;font-size:11px}
-table.nice th{background:#1a3a6b;color:#fff;padding:5px 8px;text-align:left}
-table.nice td{padding:5px 8px;border-bottom:1px solid #e0e4f0;color:#333}
-table.nice tr:nth-child(even) td{background:#f4f6ff}
-
-/* TWO COL */
-.two-col{display:flex;gap:12px;flex:1}
-.col-left,.col-right{flex:1;display:flex;flex-direction:column;gap:8px}
-
-/* TECH GRID */
-.tech-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
-.tech-card{background:#f7f9ff;border:1.5px solid #d0d8f0;border-radius:6px;padding:7px 10px;text-align:center}
-.tech-card .tname{font-size:12px;font-weight:700;color:#1a3a6b}
-.tech-card .tpurpose{font-size:10px;color:#666;margin-top:2px;line-height:1.3}
-
-/* RESULT BAR */
-.rbar-wrap{display:flex;flex-direction:column;gap:6px}
-.rbar{display:flex;align-items:center;gap:8px}
-.rbar-label{font-size:11px;color:#333;width:180px;flex-shrink:0}
-.rbar-track{flex:1;background:#e0e4f0;border-radius:3px;height:12px;overflow:hidden}
-.rbar-fill{height:100%;background:#1a3a6b;border-radius:3px}
-.rbar-val{font-size:11px;font-weight:700;color:#1a3a6b;width:60px;text-align:right}
-
-/* FORMULA BOX */
-.formula{background:#e8eeff;border-left:4px solid #1a3a6b;border-radius:0 5px 5px 0;padding:7px 12px;font-family:monospace;font-size:12px;color:#1a3a6b}
-
-/* FUTURE CARDS */
-.future-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;flex:1}
-.future-card{background:#f7f9ff;border:1.5px solid #d0d8f0;border-radius:7px;padding:10px 12px}
-.future-card h4{font-size:11.5px;font-weight:700;color:#1a3a6b;margin-bottom:4px}
-.future-card p{font-size:10.5px;color:#555;line-height:1.4}
-.future-card .num{font-size:20px;font-weight:800;color:#d0d8f0;margin-bottom:3px}
-
-/* CONCLUSION */
-.concl-box{background:#f7f9ff;border:2px solid #1a3a6b;border-radius:8px;padding:16px 20px;text-align:center}
-.concl-box h3{font-size:16px;font-weight:700;color:#1a3a6b;margin-bottom:8px}
-.concl-box p{font-size:12px;color:#444;line-height:1.6}
-.team-table td{padding:4px 10px;font-size:11.5px;border-bottom:1px solid #e0e4f0}
-.team-table td:first-child{font-weight:700;color:#1a3a6b}
-
-/* PASS badge */
-.pass{background:#e6f4ea;color:#2d7a3a;border:1px solid #a8d5b0;border-radius:4px;padding:1px 7px;font-size:10px;font-weight:700}
-
-@media print{
-  body{background:#fff}
-  .controls{display:none}
-  .slide{display:flex!important;page-break-after:always;break-after:page;box-shadow:none;border-radius:0}
-  .slides-wrap{padding:0;max-width:100%}
-}
+body{font-family:Arial,sans-serif;background:#0f0e1a;color:#fff;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:30px 16px}
+h1{font-size:22px;font-weight:700;color:#a78bfa;margin-bottom:8px;text-align:center}
+p{font-size:13px;color:#9ca3af;margin-bottom:28px;text-align:center}
+.btn{background:linear-gradient(135deg,#7c3aed,#4f46e5);color:#fff;border:none;padding:14px 36px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:.5px;transition:opacity .2s}
+.btn:hover{opacity:.88}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.status{margin-top:18px;font-size:13px;color:#6ee7b7;min-height:20px;text-align:center}
+.preview{display:grid;grid-template-columns:repeat(4,80px);gap:8px;margin:24px 0}
+.slide-thumb{width:80px;height:52px;border-radius:5px;border:2px solid #4c1d95;display:flex;align-items:center;justify-content:center;font-size:9px;color:#c4b5fd;font-weight:700;text-align:center;padding:4px;background:#1e1b4b}
 </style>
 </head>
 <body>
+<h1>🎯 Data Analysis Dashboard</h1>
+<p>7-Slide PPT — Same dark purple design as your presentation<br/>Click to generate &amp; download the .pptx file</p>
 
-<div class="controls">
-  <button class="ctrl-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>◀ Prev</button>
-  <span class="slide-info" id="slideInfo">1 / 12</span>
-  <button class="ctrl-btn" id="nextBtn" onclick="changeSlide(1)">Next ▶</button>
-  <button class="print-btn" onclick="window.print()">🖨️ Print All</button>
-</div>
+<div class="preview" id="thumbs"></div>
 
-<div class="slides-wrap">
-
-<!-- SLIDE 1: COVER -->
-<div class="slide s1 active" id="slide-1">
-  <div class="cover-top">
-    <div class="inst">Government Engineering College, Vaishali | B.Tech. CSE (IoT) – 2025–26</div>
-    <div class="main-title">Data Analysis Dashboard</div>
-    <div class="sub-title">An Interactive Web-Based Platform for Data Visualization, Trend Forecasting, Correlation Analysis &amp; AI-Driven Business Insights</div>
-    <div class="badge-row">
-      <div class="badge">React.js</div>
-      <div class="badge">Recharts</div>
-      <div class="badge">Groq API</div>
-      <div class="badge">LLaMA 3.3 70B</div>
-      <div class="badge">Linear Regression</div>
-      <div class="badge">Pearson Correlation</div>
-    </div>
-    <div class="team-row">
-      <div class="team-chip">Amarjeet Kumar (22155135005)</div>
-      <div class="team-chip">Shanu Kumar (22155135026)</div>
-      <div class="team-chip">Kartik Raj (22155135023)</div>
-      <div class="team-chip">Krishan Murari (22155125051)</div>
-    </div>
-  </div>
-  <div class="bottom-bar">
-    <span>Guide: Prof. Uttam Kumar</span>
-    <span>HOD: Prof. Manoj Kumar Sah</span>
-    <span>GEC Vaishali, Bihar, India</span>
-  </div>
-</div>
-
-<!-- SLIDE 2: AGENDA -->
-<div class="slide" id="slide-2">
-  <div class="slide-header"><span class="ch-num">Agenda</span><h2>Presentation Overview</h2></div>
-  <div class="slide-body">
-    <div class="card-row" style="flex:1">
-      <div class="card"><div class="icon">🎯</div><h4>1. Introduction</h4><p>Problem statement, motivation and background</p></div>
-      <div class="card"><div class="icon">⚙️</div><h4>2. Architecture</h4><p>System design, data flow, component structure</p></div>
-      <div class="card"><div class="icon">🛠️</div><h4>3. Technologies</h4><p>React, Groq API, PapaParse, Recharts, Lodash</p></div>
-    </div>
-    <div class="card-row" style="flex:1">
-      <div class="card"><div class="icon">📊</div><h4>4. Modules</h4><p>KPI, Charts, Forecast, Correlation, AI Chat, Report</p></div>
-      <div class="card"><div class="icon">✅</div><h4>5. Testing & Results</h4><p>Test cases, performance metrics, comparisons</p></div>
-      <div class="card"><div class="icon">🚀</div><h4>6. Future Scope</h4><p>Advanced ML, real-time data, IoT integration</p></div>
-    </div>
-  </div>
-  <div class="slide-footer"><span>GEC Vaishali – B.Tech. Final Year Project 2025–26</span><span>Slide 2 / 12</span></div>
-</div>
-
-<!-- SLIDE 3: PROBLEM STATEMENT -->
-<div class="slide" id="slide-3">
-  <div class="slide-header"><span class="ch-num">Ch. 3</span><h2>Problem Statement & Motivation</h2></div>
-  <div class="slide-body">
-    <div class="two-col">
-      <div class="col-left">
-        <b style="font-size:13px;color:#1a3a6b">Pain Points</b>
-        <div class="card" style="flex:0"><h4>💰 Cost Barrier</h4><p>Tableau / Power BI cost ₹800+/month — unaffordable for SMEs and students</p></div>
-        <div class="card" style="flex:0"><h4>💻 Technical Complexity</h4><p>Python / R require programming expertise; excludes non-technical users</p></div>
-        <div class="card" style="flex:0"><h4>📦 Installation Overhead</h4><p>Most tools need desktop install or server setup before use</p></div>
-        <div class="card" style="flex:0"><h4>🤖 No AI Integration</h4><p>Traditional tools can't answer natural language questions about data</p></div>
-      </div>
-      <div class="col-right">
-        <b style="font-size:13px;color:#1a3a6b">Our Solution</b>
-        <div class="concl-box" style="flex:1;display:flex;flex-direction:column;justify-content:center">
-          <h3>✅ Zero-Installation Browser App</h3>
-          <p>A single React.js web application combining <b>CSV/Excel parsing</b>, <b>4 chart types</b>, <b>ML forecasting</b>, <b>correlation heatmap</b>, <b>AI chat</b>, and <b>automated report generation</b> — completely free, runs in any browser.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="slide-footer"><span>GEC Vaishali – B.Tech. Final Year Project 2025–26</span><span>Slide 3 / 12</span></div>
-</div>
-
-<!-- SLIDE 4: SYSTEM ARCHITECTURE -->
-<div class="slide" id="slide-4">
-  <div class="slide-header"><span class="ch-num">Ch. 5</span><h2>System Architecture & Data Flow</h2></div>
-  <div class="slide-body">
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-dot">1</div>
-        <div class="tl-text"><h4>File Input</h4><p>User drags or selects CSV / XLSX file → Browser File API reads it into memory</p></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot">2</div>
-        <div class="tl-text"><h4>Parsing</h4><p>PapaParse (CSV) or SheetJS (Excel) converts bytes into structured JavaScript array</p></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot">3</div>
-        <div class="tl-text"><h4>Auto-Detection</h4><p>Keyword-based column detection identifies Sales, Profit, Category, Date columns automatically</p></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot">4</div>
-        <div class="tl-text"><h4>Computation</h4><p>Stats, KPIs, Pearson correlation matrix, Linear regression — all computed client-side in JS</p></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot">5</div>
-        <div class="tl-text"><h4>Visualization</h4><p>Recharts renders Area, Bar, Pie, and Grouped Bar charts from computed arrays</p></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-dot">6</div>
-        <div class="tl-text"><h4>AI Inference</h4><p>First 50–80 rows + stats sent to Groq API → LLaMA 3.3 70B returns natural language insights</p></div>
-      </div>
-    </div>
-  </div>
-  <div class="slide-footer"><span>GEC Vaishali – B.Tech. Final Year Project 2025–26</span><span>Slide 4 / 12</span></div>
-</div>
-
-<!-- SLIDE 5: TECHNOLOGIES -->
-<div class="slide" id="slide-5">
-  <div class="slide-header"><span class="ch-num">Ch. 6</span><h2>Technologies & Tools Used</h2></div>
-  <div class="slide-body">
-    <div class="tech-grid">
-      <div class="tech-card"><div class="tname">React.js 18</div><div class="tpurpose">Component UI, Hooks, SPA routing</div></div>
-      <div class="tech-card"><div class="tname">Tailwind CSS</div><div class="tpurpose">Dark-theme glassmorphism design</div></div>
-      <div class="tech-card"><div class="tname">Recharts 2</div><div class="tpurpose">Area, Bar, Pie, Grouped charts</div></div>
-      <div class="tech-card"><div class="tname">PapaParse 5</div><div class="tpurpose">High-performance CSV parser</div></div>
-      <div class="tech-card"><div class="tname">SheetJS</div><div class="tpurpose">Excel XLSX/XLS reader</div></div>
-      <div class="tech-card"><div class="tname">Lodash 4</div><div class="tpurpose">Data grouping, aggregation</div></div>
-      <div class="tech-card"><div class="tname">Groq API</div><div class="tpurpose">LLM inference endpoint</div></div>
-      <div class="tech-card"><div class="tname">LLaMA 3.3 70B</div><div class="tpurpose">Natural language responses</div></div>
-      <div class="tech-card"><div class="tname">Lucide React</div><div class="tpurpose">UI icon library</div></div>
-      <div class="tech-card"><div class="tname">JS ES6+</div><div class="tpurpose">Linear Regression, Pearson Corr</div></div>
-      <div class="tech-card"><div class="tname">React Hooks</div><div class="tpurpose">useState, useEffect, useCallback</div></div>
-      <div class="tech-card"><div class="tname">File/Blob API</div><div class="tpurpose">Upload + report download</div></div>
-    </div>
-    <div class="kpi-row" style="margin-top:8px">
-      <div class="kpi"><div class="kv">0</div><div class="kl">Backend Servers</div></div>
-      <div class="kpi"><div class="kv">0s</div><div class="kl">Setup Time</div></div>
-      <div class="kpi"><div class="kv">₹0</div><div class="kl">Cost to Use</div></div>
-      <div class="kpi"><div class="kv">8</div><div class="kl">Modules Built</div></div>
-    </div>
-  </div>
-  <div class="slide-footer"><span>GEC Vaishali – B.Tech. Final Year Project 2025–26</span><span>Slide 5 / 12</span></div>
-</div>
-
-<!-- SLIDE 6: CORE MODULES -->
-<div class="slide" id="slide-6">
-  <div class="slide-header"><span class="ch-num">Ch. 7–13</span><h2>Key Modules of the Dashboard</h2></div>
-  <div class="slide-body">
-    <div class="card-row" style="flex:1">
-      <div class="card"><h4>📁 File Upload</h4><p>Drag-and-drop + click. Supports CSV &amp; Excel. Animated loading screen during analysis.</p></div>
-      <div class="card"><h4>📌 KPI Dashboard</h4><p>Auto-detects Total Sales, Profit, AOV. Data quality, duplicate alerts, top/bottom performers.</p></div>
-      <div class="card"><h4>📊 Charts</h4><p>Area chart, Horizontal bar, Pie/Donut, Grouped bar — all auto-generated from dataset.</p></div>
-    </div>
-    <div class="card-row" style="flex:1">
-      <div class="card"><h4>📈 Forecasting</h4><p>OLS Linear Regression. Predicts 5 future periods. Slope-based trend interpretation.</p></div>
-      <div class="card"><h4>🌡️ Correlation</h4><p>Pearson r matrix for up to 6 numeric cols. Color-coded heatmap (green=positive, red=negative).</p></div>
-      <div class="card"><h4>🤖 AI Chat</h4><p>LLaMA 3.3 70B via Groq. Multi-turn conversation. Answers data-specific questions in &lt;2.8s.</p></div>
-    </div>
-    <div class="card" style="flex:0;background:#e8eeff;border-color:#1a3a6b">
-      <h4>📝 AI Report Generator</h4>
-      <p>1-click structured business report: Executive Summary → Key Findings → Trend Analysis → Recommendations → Conclusion. Downloadable as .txt</p>
-    </div>
-  </div>
-  <div class="slide-footer"><span>GEC Vaishali – B.Tech. Final Year Project 2025–26</span><span>Slide 6 / 12</span></div>
-</div>
-
-<!-- SLIDE 7: ALGORITHMS -->
-<div class="slide" id="slide-7">
-  <div class="slide-header"><span class="ch-num">Ch. 10–11</span><h2>Algorithms: Forecasting & Correlation</h2></div>
-  <div class="slide-body">
-    <div class="two-col">
-      <div class="col-left">
-        <b style="font-size:13px;color:#1a3a6b">📈 Linear Regression (OLS)</b>
-        <div class="formula">slope (m) = (n·Σxy − Σx·Σy)<br/>              ÷ (n·Σx² − (Σx)²)<br/><br/>intercept (b) = (Σy − m·Σx) / n<br/><br/>predict(x) = m·x + b</div>
-        <div class="card" style="flex:0"><h4>Application</h4><p>Time variable x = array index. Generates 5 future forecasts. Slope sign interpreted as upward/downward trend.</p></div>
-      </div>
-      <div class="col-right">
-        <b style="font-size:13px;color:#1a3a6b">🌡️ Pearson Correlation</b>
-        <div class="formula">r(A,B) = Σ[(Aᵢ−Ā)(Bᵢ−B̄)]<br/>        ÷ √[Σ(Aᵢ−Ā)²·Σ(Bᵢ−B̄)²]<br/><br/>Range: −1 to +1</div>
-        <div class="card" style="flex:0"><h4>Color Encoding</h4><p>Dark green (r&gt;0.7) strong positive | Purple (diagonal=1.0) | Dark red (r&lt;−0.7) strong negative</p></div>
-        <div class="card" style="flex:0"><h4>Performance</h4><p>Limited to 6 numeric columns. O(36×n) complexity. Computed once on file load, cached in state.</p></div>
-      </div>
-    </div>
-  </div>
-  <div class="slide-footer"><span>GEC Vaishali – B.Tech. Final Year Project 2025–26</span><span>Slide 7 / 12</span></div>
-</div>
-
-<!-- SLIDE 8: AI FEATURES -->
-<div class="slide" id="slide-8">
-  <div class="slide-header"><span class="ch-num">Ch. 12–13</span><h2>AI Features: Chat & Report Generator</h2></div>
-  <div class="slide-body">
-    <div class="two-col">
-      <div class="col-left">
-        <b style="font-size:13px;color:#1a3a6b">🤖 AI Chat Module</b>
-        <table class="nice" style="font-size:10.5px">
-          <tr><th>Feature</th><th>Detail</th></tr>
-          <tr><td>LLM Model</td><td>LLaMA 3.3 70B Versatile</td></tr>
-          <tr><td>API</td><td>Groq (ultra-fast inference)</td></tr>
-          <tr><td>Context</td><td>All headers + first 50 rows</td></tr>
-          <tr><td>Memory</td><td>Full conversation history</td></tr>
-          <tr><td>Avg Response</td><td>1.2 – 2.8 seconds</td></tr>
-          <tr><td>Suggestions</td><td>4 smart question chips</td></tr>
-        </table>
-      </div>
-      <div class="col-right">
-        <b style="font-size:13px;color:#1a3a6b">📝 AI Report Generator</b>
-        <div class="timeline">
-          <div class="tl-item"><div class="tl-dot" style="background:#1a3a6b;font-size:9px">1</div><div class="tl-text"><h4>Executive Summary</h4><p>3–4 sentence dataset overview</p></div></div>
-          <div class="tl-item"><div class="tl-dot" style="background:#1a3a6b;font-size:9px">2</div><div class="tl-text"><h4>Key Findings</h4><p>Bulleted insights with specific numbers</p></div></div>
-          <div class="tl-item"><div class="tl-dot" style="background:#1a3a6b;font-size:9px">3</div><div class="tl-text"><h4>Trend Analysis</h4><p>Growth/decline patterns</p></div></div>
-          <div class="tl-item"><div class="tl-dot" style="background:#1a3a6b;font-size:9px">4</div><div class="tl-text"><h4>Recommendations</h4><p>Actionable business actions</p></div></div>
-          <div class="tl-item"><div class="tl-dot" style="background:#1a3a6b;font-size:9px">5</div><div class="tl-text"><h4>Download</h4><p>Save as analysis_report.txt</p></div></div>
-        </div>
-      </div>
-    </div>
-    <div class="kpi-row" style="margin-top:4px">
-      <div class="kpi"><div class="kv">~2s</div><div class="kl">Chat response time</div></div>
-      <div class="kpi"><div class="kv">~5s</div><div class="kl">Report generation</div></div>
-      <div class="kpi"><div class="kv">80</div><div class="kl">Rows sent as context</div></div>
-      <div class="kpi"><div class="kv">6</div><div class="kl">Report sections</div></div>
-    </div>
-  </div>
-  <div class="slide-footer"><span>GEC Vaishali – B.Tech. Final Year Project 2025–26</span><span>Slide 8 / 12</span></div>
-</div>
-
-<!-- SLIDE 9: TESTING -->
-<div class="slide" id="slide-9">
-  <div class="slide-header"><span class="ch-num">Ch. 15</span><h2>Testing & Validation Results</h2></div>
-  <div class="slide-body">
-    <div class="two-col">
-      <div class="col-left">
-        <b style="font-size:12px;color:#1a3a6b">Test Cases</b>
-        <table class="nice">
-          <tr><th>Test Case</th><th>Result</th></tr>
-          <tr><td>CSV file upload</td><td><span class="pass">PASS</span></td></tr>
-          <tr><td>Excel (.xlsx) upload</td><td><span class="pass">PASS</span></td></tr>
-          <tr><td>KPI auto-detection</td><td><span class="pass">PASS</span></td></tr>
-          <tr><td>Linear regression accuracy</td><td><span class="pass">PASS</span></td></tr>
-          <tr><td>Pearson correlation</td><td><span class="pass">PASS</span></td></tr>
-          <tr><td>AI Chat response</td><td><span class="pass">PASS</span></td></tr>
-          <tr><td>Report generation</td><td><span class="pass">PASS</span></td></tr>
-          <tr><td>10,000+ row dataset</td><td><span class="pass">PASS</span></td></tr>
-          <tr><td>Mobile responsive</td><td><span class="pass">PASS</span></td></tr>
-        </table>
-      </div>
-      <div class="col-right">
-        <b style="font-size:12px;color:#1a3a6b">Performance Metrics</b>
-        <div class="rbar-wrap">
-          <div class="rbar"><div class="rbar-label">File load (10k rows)</div><div class="rbar-track"><div class="rbar-fill" style="width:40%"></div></div><div class="rbar-val">1.8s</div></div>
-          <div class="rbar"><div class="rbar-label">AI chat response</div><div class="rbar-track"><div class="rbar-fill" style="width:55%"></div></div><div class="rbar-val">2.8s</div></div>
-          <div class="rbar"><div class="rbar-label">Report generation</div><div class="rbar-track"><div class="rbar-fill" style="width:70%"></div></div><div class="rbar-val">7s</div></div>
-          <div class="rbar"><div class="rbar-label">Pearson deviation from scipy</div><div class="rbar-track"><div class="rbar-fill" style="width:5%"></div></div><div class="rbar-val">&lt;0.001</div></div>
-          <div class="rbar"><div class="rbar-label">Forecast MAE</div><div class="rbar-track"><div class="rbar-fill" style="width:16%"></div></div><div class="rbar-val">8%</div></div>
-        </div>
-        <div class="card" style="flex:0;margin-top:4px"><h4>Datasets Used</h4><p>Superstore (9,994 rows) · Monthly Revenue (36 rows) · Product Inventory (500 rows) · Student Marks XLSX (120 rows)</p></div>
-      </div>
-    </div>
-  </div>
-  <div class="slide-footer"><span>GEC Vaishali – B.Tech. Final Year Project 2025–26</span><span>Slide 9 / 12</span></div>
-</div>
-
-<!-- SLIDE 10: COMPARISON -->
-<div class="slide" id="slide-10">
-  <div class="slide-header"><span class="ch-num">Ch. 16</span><h2>Comparison with Existing Tools</h2></div>
-  <div class="slide-body">
-    <table class="nice" style="font-size:11.5px;flex:1">
-      <tr><th>Feature</th><th style="background:#0f2a50">Our Dashboard ✅</th><th>Power BI</th><th>Google Looker</th><th>Excel</th></tr>
-      <tr><td>Cost</td><td style="font-weight:700;color:#1a6b1a">Free</td><td>₹800+/mo</td><td>Free (limited)</td><td>₹400+/mo</td></tr>
-      <tr><td>Installation</td><td style="font-weight:700;color:#1a6b1a">None</td><td>Desktop app</td><td>Browser</td><td>Desktop app</td></tr>
-      <tr><td>AI Chat</td><td style="font-weight:700;color:#1a6b1a">✅ Yes</td><td>Limited</td><td>Limited</td><td>❌ No</td></tr>
-      <tr><td>Auto Report</td><td style="font-weight:700;color:#1a6b1a">✅ Yes</td><td>❌ No</td><td>❌ No</td><td>❌ No</td></tr>
-      <tr><td>ML Forecast</td><td style="font-weight:700;color:#1a6b1a">✅ Yes</td><td>✅ Yes</td><td>Partial</td><td>Manual</td></tr>
-      <tr><td>Correlation Map</td><td style="font-weight:700;color:#1a6b1a">✅ Yes</td><td>Partial</td><td>❌ No</td><td>Manual</td></tr>
-      <tr><td>Setup Time</td><td style="font-weight:700;color:#1a6b1a">0 seconds</td><td>30+ mins</td><td>5 mins</td><td>10 mins</td></tr>
-      <tr><td>Privacy (data stays local)</td><td style="font-weight:700;color:#1a6b1a">✅ Yes</td><td>❌ Cloud upload</td><td>❌ Cloud upload</td><td>✅ Yes</td></tr>
-    </table>
-    <div class="card" style="flex:0;background:#e8f4e8;border-color:#2d7a3a">
-      <h4 style="color:#1a5c1a">Key Advantage</h4>
-      <p>Our dashboard is the <b>only tool</b> that combines zero-cost, zero-installation, AI chat, auto report generation, ML forecasting, and correlation analysis in a single browser app — specifically designed for SMEs and educational users in India.</p>
-    </div>
-  </div>
-  <div class="slide-footer"><span>GEC Vaishali – B.Tech. Final Year Project 2025–26</span><span>Slide 10 / 12</span></div>
-</div>
-
-<!-- SLIDE 11: FUTURE SCOPE -->
-<div class="slide" id="slide-11">
-  <div class="slide-header"><span class="ch-num">Ch. 19</span><h2>Future Scope & Enhancements</h2></div>
-  <div class="slide-body">
-    <div class="future-grid">
-      <div class="future-card"><div class="num">01</div><h4>Advanced ML Models</h4><p>ARIMA, Holt-Winters, Prophet for seasonal forecasting</p></div>
-      <div class="future-card"><div class="num">02</div><h4>Real-Time DB Connect</h4><p>MySQL, PostgreSQL, Google Sheets, REST API live feeds</p></div>
-      <div class="future-card"><div class="num">03</div><h4>Multi-File Compare</h4><p>Upload two CSVs and auto-calculate YoY growth rates</p></div>
-      <div class="future-card"><div class="num">04</div><h4>Natural Language Charts</h4><p>Type "show bar chart of top products" → AI generates chart</p></div>
-      <div class="future-card"><div class="num">05</div><h4>PDF Export</h4><p>Branded PDF reports with embedded charts using jsPDF</p></div>
-      <div class="future-card"><div class="num">06</div><h4>🌐 IoT Streams</h4><p>MQTT/WebSocket integration for real-time sensor dashboards — directly aligned with CSE (IoT) curriculum</p></div>
-    </div>
-    <div class="card" style="flex:0;background:#e8eeff;border-color:#1a3a6b;margin-top:4px">
-      <h4>IoT Integration — Our Core Specialization</h4>
-      <p>The most compelling future direction is direct IoT sensor data stream integration, enabling real-time industrial monitoring dashboards — directly leveraging the B.Tech. CSE (IoT) curriculum at GEC Vaishali.</p>
-    </div>
-  </div>
-  <div class="slide-footer"><span>GEC Vaishali – B.Tech. Final Year Project 2025–26</span><span>Slide 11 / 12</span></div>
-</div>
-
-<!-- SLIDE 12: CONCLUSION & TEAM -->
-<div class="slide" id="slide-12">
-  <div class="slide-header"><span class="ch-num">Ch. 17 & 20</span><h2>Conclusion & Team</h2></div>
-  <div class="slide-body">
-    <div class="concl-box" style="flex:0">
-      <h3>🎯 Project Successfully Achieved All 10 Objectives</h3>
-      <p>The Data Analysis Dashboard demonstrates that modern browser technologies can deliver enterprise-grade analytics at zero cost. The AI chat and report generator, powered by LLaMA 3.3 via Groq, provide a differentiating capability unavailable in most free tools. All algorithms (regression, Pearson correlation) match Python scientific computing accuracy (&lt;0.001 deviation).</p>
-    </div>
-    <table class="nice team-table" style="flex:0">
-      <tr><th>Student</th><th>Reg. No.</th><th>Primary Contributions</th></tr>
-      <tr><td>Amarjeet Kumar</td><td>22155135005</td><td>Architecture, UI/UX, AI Chat, Report Generator</td></tr>
-      <tr><td>Shanu Kumar</td><td>22155135026</td><td>File Parsing (CSV/XLSX), Analytics Engine, KPI Detection</td></tr>
-      <tr><td>Kartik Raj</td><td>22155135023</td><td>All 4 Chart Types, Top/Bottom Analyzer, Loading Animation</td></tr>
-      <tr><td>Krishan Murari</td><td>22155125051</td><td>Correlation Heatmap, Pearson Algorithm, Linear Regression</td></tr>
-    </table>
-    <div class="card-row" style="flex:0">
-      <div class="card" style="text-align:center"><h4>Project Guide</h4><p>Prof. Uttam Kumar<br/>Asst. Professor, CSE (IoT)</p></div>
-      <div class="card" style="text-align:center"><h4>Head of Department</h4><p>Prof. Manoj Kumar Sah<br/>HOD, CSE (IoT), GEC Vaishali</p></div>
-      <div class="card" style="text-align:center;background:#1a3a6b;border-color:#1a3a6b"><h4 style="color:#90b4e8">Thank You! 🙏</h4><p style="color:#c8daef">Government Engineering College, Vaishali<br/>B.Tech. CSE (IoT) | 2022–2026</p></div>
-    </div>
-  </div>
-  <div class="slide-footer"><span>GEC Vaishali – B.Tech. Final Year Project 2025–26</span><span>Slide 12 / 12</span></div>
-</div>
-
-</div><!-- end slides-wrap -->
+<button class="btn" id="genBtn" onclick="generate()">⬇ Generate &amp; Download PPTX</button>
+<div class="status" id="status"></div>
 
 <script>
-let cur = 1;
-const total = 12;
-function changeSlide(dir) {
-  document.getElementById('slide-' + cur).classList.remove('active');
-  cur = Math.max(1, Math.min(total, cur + dir));
-  document.getElementById('slide-' + cur).classList.add('active');
-  document.getElementById('slideInfo').textContent = cur + ' / ' + total;
-  document.getElementById('prevBtn').disabled = cur === 1;
-  document.getElementById('nextBtn').disabled = cur === total;
-}
-document.addEventListener('keydown', e => {
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
-  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
+const slides=[
+  "01 / Title",  "02 / Overview", "03 / Key Features",
+  "04 / Architecture", "05 / Implementation", "06 / Results",  "07 / Thank You"
+];
+const thumbs=document.getElementById('thumbs');
+slides.forEach((s,i)=>{
+  const d=document.createElement('div');
+  d.className='slide-thumb';
+  d.textContent=s;
+  thumbs.appendChild(d);
 });
+
+async function generate(){
+  const btn=document.getElementById('genBtn');
+  const status=document.getElementById('status');
+  btn.disabled=true;
+  status.textContent='⏳ Building slides...';
+
+  try{
+    const pptx=new PptxGenJS();
+    pptx.layout='LAYOUT_WIDE';
+    pptx.title='AI-Powered Data Analysis Dashboard';
+
+    // ─── COLORS ───
+    const BG='0E0C1E', PURPLE='7C3AED', LPURPLE='A78BFA', TEAL='10B981',
+          PINK='EC4899', AMBER='F59E0B', WHITE='FFFFFF', GRAY='6B7280',
+          CARD='1E1B4B', BORDER='4C1D95', TEXT2='C4B5FD', GREEN='34D399',
+          DARK2='1a1730';
+
+    function bg(slide){
+      slide.addShape(pptx.ShapeType.rect,{x:0,y:0,w:'100%',h:'100%',fill:{color:BG}});
+      // top accent bar
+      slide.addShape(pptx.ShapeType.rect,{x:0,y:0,w:'100%',h:0.06,fill:{color:PURPLE}});
+      // bottom bar
+      slide.addShape(pptx.ShapeType.rect,{x:0,y:7.44,w:'100%',h:0.06,fill:{color:TEAL}});
+    }
+
+    function card(slide,x,y,w,h,borderColor=BORDER){
+      slide.addShape(pptx.ShapeType.rect,{x,y,w,h,fill:{color:CARD},line:{color:borderColor,width:1.2},rectRadius:0.08});
+    }
+
+    function tag(slide,text,x,y,color=PURPLE){
+      slide.addShape(pptx.ShapeType.rect,{x,y,w:1.3,h:0.26,fill:{color:color},rectRadius:0.04});
+      slide.addText(text,{x,y,w:1.3,h:0.26,fontSize:9,bold:true,color:WHITE,align:'center',valign:'middle'});
+    }
+
+    function slideNum(slide,n){
+      slide.addText(`0${n} / ${['Introduction','Project Overview','Key Features','Architecture','Implementation','Results','Conclusion'][n-1]}`,
+        {x:0.3,y:7.22,w:4,h:0.2,fontSize:8,color:GRAY,align:'left'});
+    }
+
+    // ══════════════════════════════════════════
+    // SLIDE 1 – TITLE
+    // ══════════════════════════════════════════
+    {
+      const s=pptx.addSlide();
+      bg(s);
+      // big circle decoration
+      s.addShape(pptx.ShapeType.ellipse,{x:7.8,y:-0.8,w:3.5,h:3.5,fill:{color:'1a1045'},line:{color:'2d1f6e',width:1}});
+      s.addShape(pptx.ShapeType.ellipse,{x:8.4,y:4.2,w:2.2,h:2.2,fill:{color:'1a1045'},line:{color:'2d1f6e',width:1}});
+
+      // institution
+      s.addText('Government Engineering College Vaishali',{x:0.5,y:0.25,w:12,h:0.28,fontSize:11,color:GRAY,align:'center'});
+
+      // title
+      s.addText('AI-Powered Data',{x:0.5,y:0.8,w:6.5,h:0.9,fontSize:38,bold:true,color:WHITE});
+      s.addText('Analysis Dashboard',{x:0.5,y:1.62,w:6.5,h:0.9,fontSize:38,bold:true,color:LPURPLE});
+      // line accent
+      s.addShape(pptx.ShapeType.rect,{x:0.5,y:2.56,w:2.8,h:0.05,fill:{color:PINK}});
+
+      s.addText('Smart Insights  •  Data Quality Reports  •  Professional Visualizations',
+        {x:0.5,y:2.74,w:6,h:0.28,fontSize:11,color:TEXT2,italic:true});
+
+      // team card
+      card(s,0.5,3.1,4.2,3.3);
+      s.addText('TEAM MEMBERS',{x:0.7,y:3.2,w:3,h:0.24,fontSize:9,bold:true,color:TEAL,charSpacing:2});
+      const team=[
+        ['Amarjeet Kumar','CSE (IoT) — 22155135005',PURPLE],
+        ['Kartik Raj','CSE (IoT) — 22155135023',PINK],
+        ['Shanu Kumar','CSE (IoT) — 22155135026',LPURPLE],
+        ['Krishna Murari','CSE (IoT) — 22155125051',AMBER],
+      ];
+      team.forEach(([name,reg,col],i)=>{
+        const y=3.58+i*0.56;
+        s.addShape(pptx.ShapeType.ellipse,{x:0.72,y:y+0.04,w:0.22,h:0.22,fill:{color:col}});
+        s.addText(name,{x:1.06,y,w:2.2,h:0.22,fontSize:11,bold:true,color:WHITE});
+        s.addText(reg,{x:1.06,y:y+0.22,w:2.8,h:0.18,fontSize:8.5,color:TEXT2});
+      });
+
+      // mentor card
+      card(s,5.1,3.1,4.3,3.3);
+      s.addText('UNDER THE GUIDANCE OF',{x:5.3,y:3.2,w:3.8,h:0.22,fontSize:8,bold:true,color:GRAY,charSpacing:2});
+      s.addText('MENTOR',{x:5.3,y:3.52,w:3.8,h:0.2,fontSize:8,color:GRAY,charSpacing:1,align:'center'});
+      // avatar Z
+      s.addShape(pptx.ShapeType.ellipse,{x:6.75,y:3.78,w:0.7,h:0.7,fill:{color:PURPLE}});
+      s.addText('Z',{x:6.75,y:3.78,w:0.7,h:0.7,fontSize:18,bold:true,color:WHITE,align:'center',valign:'middle'});
+      s.addText('Prof. Uttam Kumar',{x:5.3,y:4.56,w:3.8,h:0.24,fontSize:11,bold:true,color:WHITE,align:'center'});
+      s.addText('Department of CSE (IoT)',{x:5.3,y:4.8,w:3.8,h:0.2,fontSize:9,color:TEXT2,align:'center'});
+      s.addShape(pptx.ShapeType.rect,{x:5.3,y:5.12,w:3.8,h:0.02,fill:{color:BORDER}});
+      s.addText('HEAD OF DEPARTMENT',{x:5.3,y:5.2,w:3.8,h:0.2,fontSize:8,color:GRAY,charSpacing:1,align:'center'});
+      s.addShape(pptx.ShapeType.ellipse,{x:6.75,y:5.46,w:0.7,h:0.7,fill:{color:TEAL}});
+      s.addText('M',{x:6.75,y:5.46,w:0.7,h:0.7,fontSize:18,bold:true,color:WHITE,align:'center',valign:'middle'});
+      s.addText('Prof. Manoj Kumar Sah',{x:5.3,y:6.24,w:3.8,h:0.24,fontSize:11,bold:true,color:WHITE,align:'center'});
+      s.addText('Head of Department, CSE',{x:5.3,y:6.48,w:3.8,h:0.2,fontSize:9,color:TEXT2,align:'center'});
+      slideNum(s,1);
+    }
+
+    // ══════════════════════════════════════════
+    // SLIDE 2 – PROJECT OVERVIEW
+    // ══════════════════════════════════════════
+    {
+      const s=pptx.addSlide();
+      bg(s);
+      s.addText('Project Overview',{x:0.5,y:0.28,w:12,h:0.55,fontSize:28,bold:true,color:WHITE});
+      s.addText('What we built and why it matters',{x:0.5,y:0.82,w:12,h:0.26,fontSize:12,color:TEXT2,italic:true});
+      s.addShape(pptx.ShapeType.rect,{x:0.5,y:1.12,w:2.5,h:0.04,fill:{color:PINK}});
+
+      // description box
+      card(s,0.5,1.32,12,0.82,PURPLE);
+      s.addText('An AI-powered, browser-based data analytics platform that processes CSV, Excel, and PDF files to deliver professional-grade insights, data quality reports, and interactive visualizations — all without server infrastructure.',
+        {x:0.7,y:1.36,w:11.6,h:0.72,fontSize:11.5,color:WHITE,valign:'middle'});
+
+      // 4 feature boxes
+      const feats=[
+        ['File Support','CSV • Excel • PDF',PURPLE],
+        ['AI Insights','Trend & margin analysis',TEAL],
+        ['Quality Report','Duplicates & missing values',PINK],
+        ['Visualizations','Bar, Line, Pie, Area charts',AMBER],
+      ];
+      feats.forEach(([title,sub,col],i)=>{
+        const x=0.5+i*3.05;
+        s.addShape(pptx.ShapeType.rect,{x,y:2.36,w:2.9,h:0.96,fill:{color:CARD},line:{color:col,width:2},rectRadius:0.08});
+        s.addText(title,{x,y:2.42,w:2.9,h:0.32,fontSize:12,bold:true,color:WHITE,align:'center'});
+        s.addText(sub,{x,y:2.74,w:2.9,h:0.28,fontSize:9,color:TEXT2,align:'center'});
+      });
+
+      // tech stack
+      s.addText('TECHNOLOGY STACK',{x:0.5,y:3.52,w:12,h:0.24,fontSize:10,bold:true,color:GRAY,charSpacing:2});
+      const techs=['React 18','Recharts','PapaParse','SheetJS','Lodash','Tailwind CSS','Groq API'];
+      techs.forEach((t,i)=>{
+        const x=0.5+i*1.75;
+        if(x+1.65>13) return;
+        s.addShape(pptx.ShapeType.rect,{x,y:3.84,w:1.65,h:0.36,fill:{color:DARK2},line:{color:BORDER,width:1},rectRadius:0.04});
+        s.addText(t,{x,y:3.84,w:1.65,h:0.36,fontSize:10,color:WHITE,align:'center',valign:'middle'});
+      });
+
+      // project description bottom
+      card(s,0.5,4.46,12,2.3);
+      s.addText('Why This Project Matters',{x:0.7,y:4.56,w:11,h:0.3,fontSize:13,bold:true,color:LPURPLE});
+      const pts=[
+        '• Enterprise analytics tools (Tableau, Power BI) cost ₹800+/month — inaccessible for SMEs and students.',
+        '• Our dashboard is 100% browser-based — zero installation, zero server, zero cost.',
+        '• Integrates LLaMA 3.3 70B via Groq API for natural language data querying in real time.',
+        '• Designed for non-technical users — upload a CSV and get insights in under 5 seconds.',
+      ];
+      pts.forEach((pt,i)=>{
+        s.addText(pt,{x:0.7,y:4.96+i*0.42,w:11.6,h:0.36,fontSize:10.5,color:WHITE});
+      });
+      slideNum(s,2);
+    }
+
+    // ══════════════════════════════════════════
+    // SLIDE 3 – KEY FEATURES
+    // ══════════════════════════════════════════
+    {
+      const s=pptx.addSlide();
+      bg(s);
+      s.addText('Key Features',{x:0.5,y:0.28,w:12,h:0.55,fontSize:28,bold:true,color:WHITE});
+      s.addText('Comprehensive analytics capabilities built into every dashboard',{x:0.5,y:0.82,w:12,h:0.26,fontSize:12,color:TEXT2,italic:true});
+      s.addShape(pptx.ShapeType.rect,{x:0.5,y:1.12,w:2.5,h:0.04,fill:{color:TEAL}});
+
+      const features=[
+        ['01','Multi-Format File Upload','Accepts CSV, Excel (.xlsx/.xls), and PDF files. Instant parsing with PapaParse, SheetJS, and Mammoth.js.',PURPLE],
+        ['02','Smart KPI Dashboard','Auto-detects Sales, Revenue, Profit columns and calculates Total Sales, Avg Order Value, Profit/Loss, and Product counts.',TEAL],
+        ['03','Data Quality Report','Identifies duplicate records, missing values per column, and statistical outliers (3σ rule) with actionable alerts.',PINK],
+        ['04','AI-Powered Insights','Detects sales trends, highlights top-performing products, calculates profit margin health, and flags underperforming items.',AMBER],
+        ['05','Interactive Charts','Time-series Area, horizontal Bar, Region Bar, Pie/Donut, and multi-metric Line charts powered by Recharts.',LPURPLE],
+        ['06','Filter & Explore','Column-level search filter with live record count. Top-5 / Bottom-5 performer rankings with color-coded cards.',GREEN],
+      ];
+      features.forEach(([num,title,desc,col],i)=>{
+        const col_=i%2, row_=Math.floor(i/2);
+        const x=0.5+col_*6.3, y=1.36+row_*1.8;
+        s.addShape(pptx.ShapeType.rect,{x,y,w:6.1,h:1.66,fill:{color:CARD},line:{color:col,width:1.5},rectRadius:0.08});
+        s.addShape(pptx.ShapeType.ellipse,{x:x+0.16,y:y+0.2,w:0.44,h:0.44,fill:{color:col}});
+        s.addText(num,{x:x+0.16,y:y+0.2,w:0.44,h:0.44,fontSize:10,bold:true,color:WHITE,align:'center',valign:'middle'});
+        s.addText(title,{x:x+0.72,y:y+0.2,w:5.2,h:0.3,fontSize:12,bold:true,color:WHITE});
+        s.addText(desc,{x:x+0.18,y:y+0.62,w:5.74,h:0.86,fontSize:9.5,color:TEXT2,wrap:true});
+      });
+      slideNum(s,3);
+    }
+
+    // ══════════════════════════════════════════
+    // SLIDE 4 – ARCHITECTURE
+    // ══════════════════════════════════════════
+    {
+      const s=pptx.addSlide();
+      bg(s);
+      s.addText('Architecture & Data Flow',{x:0.5,y:0.28,w:12,h:0.55,fontSize:28,bold:true,color:WHITE});
+      s.addText('How the dashboard processes and transforms raw files into actionable insights',{x:0.5,y:0.82,w:12,h:0.26,fontSize:11,color:TEXT2,italic:true});
+      s.addShape(pptx.ShapeType.rect,{x:0.5,y:1.12,w:2.5,h:0.04,fill:{color:AMBER}});
+
+      // flow steps
+      const steps=[
+        ['1','File Upload','CSV / XLSX / PDF',PURPLE],
+        ['2','Parse & Extract','PapaParse / SheetJS',PINK],
+        ['3','Analyze','Stats & Quality',TEAL],
+        ['4','Insights','AI Pattern Detection',AMBER],
+        ['5','Visualize','Recharts Rendering',LPURPLE],
+      ];
+      steps.forEach(([num,title,sub,col],i)=>{
+        const x=0.4+i*2.46;
+        s.addShape(pptx.ShapeType.rect,{x,y:1.36,w:2.2,h:1.8,fill:{color:CARD},line:{color:col,width:1.8},rectRadius:0.08});
+        s.addShape(pptx.ShapeType.ellipse,{x:x+0.72,y:1.54,w:0.76,h:0.76,fill:{color:col}});
+        s.addText(num,{x:x+0.72,y:1.54,w:0.76,h:0.76,fontSize:18,bold:true,color:WHITE,align:'center',valign:'middle'});
+        s.addText(title,{x,y:2.44,w:2.2,h:0.28,fontSize:11,bold:true,color:WHITE,align:'center'});
+        s.addText(sub,{x,y:2.72,w:2.2,h:0.28,fontSize:9,color:TEXT2,align:'center'});
+        if(i<4){
+          s.addShape(pptx.ShapeType.rect,{x:x+2.22,y:2.18,w:0.22,h:0.06,fill:{color:GRAY}});
+        }
+      });
+
+      // output modules
+      s.addText('OUTPUT MODULES',{x:0.5,y:3.38,w:12,h:0.24,fontSize:9,bold:true,color:TEAL,charSpacing:3});
+      const mods=[
+        ['KPI Cards','Sales, Profit, Orders, Products',TEAL],
+        ['Alert Panel','Duplicates, low performance flags',PINK],
+        ['Top/Bottom 5','Ranked product performers',AMBER],
+        ['Chart Suite','5 chart types, interactive',PURPLE],
+        ['Statistical Table','Mean, Max, Min, Total per column',LPURPLE],
+      ];
+      mods.forEach(([title,sub,col],i)=>{
+        const x=0.4+i*2.46;
+        s.addShape(pptx.ShapeType.rect,{x,y:3.72,w:2.2,h:1.28,fill:{color:CARD},line:{color:col,width:1.2},rectRadius:0.08});
+        s.addText(title,{x,y:3.82,w:2.2,h:0.28,fontSize:10.5,bold:true,color:WHITE,align:'center'});
+        s.addShape(pptx.ShapeType.rect,{x:x+0.4,y:4.12,w:1.4,h:0.02,fill:{color:col}});
+        s.addText(sub,{x,y:4.24,w:2.2,h:0.56,fontSize:8.5,color:TEXT2,align:'center',wrap:true});
+      });
+      slideNum(s,4);
+    }
+
+    // ══════════════════════════════════════════
+    // SLIDE 5 – IMPLEMENTATION
+    // ══════════════════════════════════════════
+    {
+      const s=pptx.addSlide();
+      bg(s);
+      s.addText('Implementation Highlights',{x:0.5,y:0.28,w:12,h:0.55,fontSize:28,bold:true,color:WHITE});
+      s.addShape(pptx.ShapeType.rect,{x:0.5,y:0.86,w:2.5,h:0.04,fill:{color:PINK}});
+
+      // left highlights
+      const highs=[
+        ['Outlier Detection (3σ Rule)',
+         'For each numeric column, calculates mean and standard deviation. Values exceeding mean + 3σ are flagged as statistical outliers.',PURPLE],
+        ['Dynamic Column Recognition',
+         'Auto-detects Sales, Revenue, Profit, Product, Region, and Date columns using case-insensitive substring matching — works across datasets.',TEAL],
+        ['Top/Bottom Performer Ranking',
+         'Groups rows by product using Lodash groupBy, sums sales per product, then sorts descending to extract top-5 and bottom-5 rankings.',PINK],
+        ['Responsive Design',
+         'Fully mobile-responsive layout using Tailwind CSS breakpoints. Cards, charts, and tables adapt from 320px to 1920px width.',AMBER],
+      ];
+      highs.forEach(([title,desc,col],i)=>{
+        const y=1.06+i*1.48;
+        s.addShape(pptx.ShapeType.rect,{x:0.4,y,w:7.1,h:1.34,fill:{color:CARD},line:{color:col,width:2},rectRadius:0.06});
+        s.addText(title,{x:0.6,y:y+0.12,w:6.8,h:0.28,fontSize:11,bold:true,color:WHITE});
+        s.addText(desc,{x:0.6,y:y+0.46,w:6.8,h:0.74,fontSize:9.5,color:TEXT2,wrap:true});
+      });
+
+      // project stats
+      card(s,7.8,1.06,4.8,5.9);
+      s.addText('PROJECT STATS',{x:7.8,y:1.18,w:4.8,h:0.24,fontSize:9,bold:true,color:TEAL,align:'center',charSpacing:2});
+      const stats=[
+        ['500+','Lines of React Code',PURPLE],
+        ['6','Chart Types',TEAL],
+        ['3','File Formats Supported',PINK],
+        ['10+','KPI Metrics Generated',AMBER],
+        ['3σ','Outlier Detection',LPURPLE],
+        ['100%','Client-Side Processing',GREEN],
+      ];
+      stats.forEach(([val,label,col],i)=>{
+        const y=1.56+i*0.88;
+        s.addShape(pptx.ShapeType.rect,{x:8,y,w:4.4,h:0.72,fill:{color:BG},line:{color:col,width:1},rectRadius:0.05});
+        s.addText(val,{x:8.1,y,w:1.2,h:0.72,fontSize:20,bold:true,color:col,align:'center',valign:'middle'});
+        s.addText(label,{x:9.4,y,w:2.9,h:0.72,fontSize:10,color:WHITE,valign:'middle'});
+      });
+      slideNum(s,5);
+    }
+
+    // ══════════════════════════════════════════
+    // SLIDE 6 – RESULTS
+    // ══════════════════════════════════════════
+    {
+      const s=pptx.addSlide();
+      bg(s);
+      s.addText('Results & Conclusion',{x:0.5,y:0.28,w:12,h:0.55,fontSize:28,bold:true,color:WHITE});
+      s.addShape(pptx.ShapeType.rect,{x:0.5,y:0.86,w:2.5,h:0.04,fill:{color:GREEN}});
+
+      // outcomes
+      card(s,0.4,1.06,6.2,5.9,TEAL);
+      s.addText('PROJECT OUTCOMES',{x:0.6,y:1.18,w:5.8,h:0.26,fontSize:9,bold:true,color:TEAL,charSpacing:2});
+      const outcomes=[
+        'Fully functional browser-based analytics dashboard',
+        'Zero backend — complete client-side data processing',
+        'Automatic profit/loss trend detection with alerts',
+        'Data quality scoring for real-world messy datasets',
+        'Professional-grade charts comparable to Power BI',
+        'Deployed & accessible via Vercel (Amarjeet\'s portfolio)',
+      ];
+      outcomes.forEach((o,i)=>{
+        const y=1.58+i*0.74;
+        s.addShape(pptx.ShapeType.ellipse,{x:0.6,y:y+0.08,w:0.22,h:0.22,fill:{color:TEAL}});
+        s.addText(o,{x:0.96,y,w:5.5,h:0.58,fontSize:10.5,color:WHITE,wrap:true});
+      });
+
+      // future scope
+      card(s,6.9,1.06,6,5.9,PINK);
+      s.addText('FUTURE SCOPE',{x:7.1,y:1.18,w:5.6,h:0.26,fontSize:9,bold:true,color:PINK,charSpacing:2});
+      const future=[
+        'Google Sheets / Drive integration',
+        'Natural language query (ask data)',
+        'Real-time collaborative dashboards',
+        'Export to PDF / Excel reports',
+        'ML-based forecasting module',
+        'Dark / light theme toggle',
+        'IoT sensor data stream support',
+      ];
+      future.forEach((f,i)=>{
+        const y=1.58+i*0.72;
+        s.addShape(pptx.ShapeType.ellipse,{x:7.1,y:y+0.08,w:0.22,h:0.22,fill:{color:PINK}});
+        s.addText(f,{x:7.44,y,w:5.3,h:0.58,fontSize:10.5,color:WHITE,wrap:true});
+      });
+      slideNum(s,6);
+    }
+
+    // ══════════════════════════════════════════
+    // SLIDE 7 – THANK YOU
+    // ══════════════════════════════════════════
+    {
+      const s=pptx.addSlide();
+      bg(s);
+      // big purple block
+      s.addShape(pptx.ShapeType.rect,{x:0,y:1.6,w:'100%',h:4.4,fill:{color:'2d1b69'}});
+
+      s.addText('Thank You!',{x:0.5,y:2.2,w:12,h:1.1,fontSize:54,bold:true,color:WHITE,align:'center'});
+      s.addShape(pptx.ShapeType.rect,{x:4.5,y:3.4,w:4,h:0.06,fill:{color:TEAL}});
+
+      s.addText('Developed by: Amarjeet Kumar  •  Kartik Raj  •  Shanu Kumar  •  Krishna Murari',
+        {x:0.5,y:3.72,w:12,h:0.32,fontSize:11,color:WHITE,align:'center'});
+      s.addText('Mentor: Prof. Uttam Kumar  |  HOD: Prof. Manoj Kumar Sah',
+        {x:0.5,y:4.08,w:12,h:0.3,fontSize:11,color:TEXT2,align:'center'});
+      s.addText('Government Engineering College Vaishali — CSE (IoT) Department',
+        {x:0.5,y:4.44,w:12,h:0.28,fontSize:10,color:GRAY,align:'center'});
+
+      // reg nos
+      const team2=[
+        ['Amarjeet Kumar','22155135005',PURPLE],
+        ['Kartik Raj','22155135023',PINK],
+        ['Shanu Kumar','22155135026',LPURPLE],
+        ['Krishna Murari','22155125051',AMBER],
+      ];
+      team2.forEach(([name,reg,col],i)=>{
+        const x=0.5+i*3.2;
+        s.addShape(pptx.ShapeType.rect,{x,y:5.12,w:3,h:0.72,fill:{color:CARD},line:{color:col,width:1.2},rectRadius:0.06});
+        s.addText(name,{x,y:5.18,w:3,h:0.28,fontSize:10,bold:true,color:WHITE,align:'center'});
+        s.addText(reg,{x,y:5.46,w:3,h:0.24,fontSize:9,color:TEXT2,align:'center'});
+      });
+
+      s.addText('B.Tech VIII Semester — 2025–2026',{x:0.5,y:6.02,w:12,h:0.26,fontSize:9,color:GRAY,align:'center'});
+      slideNum(s,7);
+    }
+
+    status.textContent='💾 Saving file...';
+    await pptx.writeFile({fileName:'DataDashboard_Presentation.pptx'});
+    status.textContent='✅ Downloaded! Check your Downloads folder.';
+    btn.disabled=false;
+
+  }catch(e){
+    status.textContent='❌ Error: '+e.message;
+    btn.disabled=false;
+    console.error(e);
+  }
+}
 </script>
 </body>
 </html>
